@@ -1,5 +1,5 @@
 GCC					= g++
-INPUT				= src/main.cpp src/game.cpp src/entity.cpp src/userinterface.cpp src/player.cpp src/gameplay.cpp src/world.cpp src/zombie.cpp src/bullet.cpp src/weapon.cpp src/collider.cpp
+INPUT				= src/main.cpp src/game.cpp src/controller.cpp src/gameplay.cpp src/world.cpp
 OUTPUT				= apocalypse.o
 INCLUDES			= -I""
 LIBRARIES			=
