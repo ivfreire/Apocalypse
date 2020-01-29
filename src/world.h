@@ -1,11 +1,17 @@
 #pragma once
+
 #include <SDL2/SDL.h>
+#include "entity.h"
+#include "player.h"
 
 class World {
 private:
 
 
 public:
+	Player* player;
+
+
 	World();
 
 	void Start();
