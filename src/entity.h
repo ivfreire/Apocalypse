@@ -2,6 +2,7 @@
 #include <string>
 #include <SDL2/SDL.h>
 #include "engine.h"
+#include "collider.h"
 
 enum class EntityType { PLAYER, ZOMBIE, BULLET };
 enum class Face { NORTH, WEST, SOUTH, EAST };
@@ -19,6 +20,7 @@ public:
 
 	Dynamics2 dynamics;
 	Vector2 size;
+	Collider* collider;
 
 	Face facing;
 

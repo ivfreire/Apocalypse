@@ -22,11 +22,13 @@ Entity::Entity(std::string title, float x, float y, float width, float height, f
 	this->dead = false;
 
 	this->rect = { (int)this->dynamics.position.x, (int)this->dynamics.position.y, (int)this->size.x, (int)this->size.y };
+
+	this->collider = new Collider(this->title, ColliderShape::BOX, &this->dynamics.position, &this->size);
 }
 
 
 void Entity::Start() {
-	
+
 }
 
 void Entity::Update(float dtime) {
@@ -36,11 +38,14 @@ void Entity::Update(float dtime) {
 	this->dynamics.velocity.add(this->dynamics.acceleration, dtime);
 	this->dynamics.position.add(this->dynamics.velocity, dtime);
 	this->rect = { (int)this->dynamics.position.x, (int)this->dynamics.position.y, (int)this->size.x, (int)this->size.y };
+
+	this->collider->Update();
 }
 
 void Entity::Render(SDL_Renderer* rdr) {
 	SDL_SetRenderDrawColor(rdr, this->color.r, this->color.g, this->color.b, this->color.a);
 	SDL_RenderFillRect(rdr, &rect);
+	this->collider->Render(rdr);
 }
 
 
