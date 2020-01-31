@@ -4,6 +4,7 @@
 #include "engine.h"
 #include "controller.h"
 #include "gameplay.h"
+#include "userinterface.h"
 
 class Game {
 private:
@@ -14,6 +15,8 @@ private:
 
 public:
 	Gameplay* gameplay;
+
+	UserInterface* UI;
 
 
 	Game(Controller* ctrl);

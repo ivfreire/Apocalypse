@@ -18,6 +18,8 @@ public:
 	Dynamics2 dynamics;
 	Vector2 size;
 
+	float speed;
+
 	EntityType type;
 
 

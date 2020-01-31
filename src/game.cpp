@@ -6,6 +6,9 @@ Game::Game(Controller* ctrl) {
 
 	this->running = true;
 
+	this->UI = new UserInterface();
+	this->ctrl->UI = this->UI;
+
 	this->gameplay = new Gameplay(this->ctrl);
 }
 
@@ -18,6 +21,7 @@ void Game::Start() {
 void Game::Update() {
 	this->ctrl->CalculateFrameRate();
 	this->gameplay->Update(this->ctrl->GetDeltaTime());
+	this->ctrl->SetWindowSize();
 }
 
 void Game::Render() {
@@ -31,6 +35,7 @@ void Game::Render() {
 
 void Game::PollEvent(SDL_Event ev) {
 	if (ev.type == SDL_KEYDOWN) if (ev.key.keysym.sym == SDLK_ESCAPE) this->GameOver();
+	this->UI->PollEvent(ev);
 	this->gameplay->PollEvent(ev);
 }
 

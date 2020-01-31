@@ -36,6 +36,7 @@ int main(int argc, char* argv[]) {
 		std::cout << "Could not create renderer!" << std::endl;
 		return -1;
 	}
+	controller->screen = window;
 	controller->renderer = renderer;
 
 	game = new Game(controller);

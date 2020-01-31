@@ -1,7 +1,8 @@
 #include "gameplay.h"
 
 Gameplay::Gameplay(Controller* ctrl) {
-	this->world = new World();
+	this->ctrl = ctrl;
+	this->world = new World(ctrl);
 }
 
 

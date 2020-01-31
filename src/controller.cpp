@@ -5,6 +5,14 @@ Controller::Controller(int width, int height) {
 }
 
 
+void Controller::SetWindowSize() {
+	int width, height;
+	SDL_GetWindowSize(this->screen, &width, &height);
+	this->window.x = (float)width;
+	this->window.y = (float)height;
+}
+
+
 void Controller::CalculateFrameRate() {
 	this->now = SDL_GetTicks();
 	Uint32 dtick = this->now - this->before;

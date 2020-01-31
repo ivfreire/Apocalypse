@@ -12,6 +12,8 @@ Entity::Entity(std::string title, Vector2 position, Vector2 size, EntityType typ
 
 	this->rect = { (int)this->dynamics.position.x, (int)this->dynamics.position.y, (int)this->size.x, (int)this->size.y };
 	this->color = { 0, 0, 0, 255};
+
+	this->speed = 200.0f;
 }
 
 

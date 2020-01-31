@@ -5,7 +5,7 @@
 
 class Gameplay {
 private:
-
+	Controller* ctrl;
 
 public:
 	World* world;
