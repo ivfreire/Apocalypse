@@ -17,6 +17,8 @@ public:
 
 	UserInterface* UI;
 
+	bool showHitboxes;
+
 
 	Controller(int width, int height);
 

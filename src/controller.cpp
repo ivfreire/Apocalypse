@@ -2,6 +2,8 @@
 
 Controller::Controller(int width, int height) {
 	this->window = { (float)width, (float)height };
+
+	this->showHitboxes = true;
 }
 
 

@@ -36,7 +36,6 @@ void Game::Render() {
 }
 
 void Game::PollEvent(SDL_Event ev) {
-	// if (ev.type == SDL_KEYDOWN) if (ev.key.keysym.sym == SDLK_ESCAPE) this->GameOver();
 	this->UI->PollEvent(ev);
 	this->gameplay->PollEvent(ev);
 }

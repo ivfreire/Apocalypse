@@ -4,6 +4,7 @@
 #include <string>
 #include <SDL2/SDL.h>
 #include "engine.h"
+#include "collider.h"
 
 enum class EntityType { PLAYER, ZOMBIE, BULLET };
 enum class Face { NORTH, WEST, SOUTH, EAST };
@@ -27,6 +28,8 @@ public:
 
 	Face facing;
 	EntityType type;
+
+	Collider* collider;
 
 
 	Entity(std::string title, Vector2 position, Vector2 size, EntityType type);
