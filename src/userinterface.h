@@ -25,6 +25,7 @@ public:
 
 	Vector2 GetAxes(int id);
 	float GetAxis(Axis axis, int id);
+	bool HasJoysticks();
 
 	~UserInterface();
 

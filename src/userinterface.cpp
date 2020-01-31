@@ -11,7 +11,7 @@ UserInterface::UserInterface() {
 
 void UserInterface::PollEvent(SDL_Event ev) {
 	this->Keyboard(ev);
-	this->Joystick(ev);
+	if (this->en_joystick) this->Joystick(ev);
 }
 
 void UserInterface::InitJoystick() {
@@ -19,6 +19,9 @@ void UserInterface::InitJoystick() {
 	for (int i = 0; i < MAX_JOYSTICKS && !found; i++) {
 		found = true;
 		this->joysticks[i] = SDL_JoystickOpen(i);
+
+		std::cout << SDL_JoystickNumHats(this->joysticks[0]) << std::endl;
+
 		this->en_joystick = true;
 	}
 }
@@ -40,8 +43,10 @@ void UserInterface::Keyboard(SDL_Event ev) {
 
 void UserInterface::Joystick(SDL_Event ev) {
 	if (ev.type == SDL_JOYAXISMOTION) {
-		Vector2 motion.set(SDL_JoystickGetAxis());
-		this->axes[0] = {  };
+		Vector2 motion = { (float)SDL_JoystickGetAxis(this->joysticks[0], 0), (float)SDL_JoystickGetAxis(this->joysticks[0], 1) };
+		motion.scale(1.0f / motion.module());
+		if (motion.module() > 0.19f) this->axes[0] = motion;
+		else this->axes[0] = { 0.0f , 0.0f };
 	}
 }
 
@@ -53,6 +58,8 @@ Vector2 UserInterface::GetAxes(int id) {
 float UserInterface::GetAxis(Axis axis, int id) {
 	return this->axes[id].get(axis);
 }
+
+bool UserInterface::HasJoysticks() { return this->en_joystick; }
 
 
 UserInterface::~UserInterface() {

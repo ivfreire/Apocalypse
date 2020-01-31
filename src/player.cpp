@@ -20,8 +20,15 @@ void Player::Update(float dtime) {
 void Player::PollEvent(SDL_Event ev) {
 	if (ev.type  == SDL_KEYDOWN) {
 		if (ev.key.keysym.sym == SDLK_SPACE) this->weapon->StartFiring();
-	} else if (ev.type ==SDL_KEYUP) {
+	} else if (ev.type == SDL_KEYUP) {
 		if (ev.key.keysym.sym == SDLK_SPACE) this->weapon->StopFiring();
+	}
+	if (this->UI->HasJoysticks()) {
+		if (ev.type == SDL_JOYBUTTONDOWN) {
+			if (ev.jbutton.button == 6) this->weapon->StartFiring();
+		} else if (ev.type == SDL_JOYBUTTONUP) {
+			if (ev.jbutton.button == 6) this->weapon->StopFiring();
+		}
 	}
 }
 

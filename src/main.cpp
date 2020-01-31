@@ -17,7 +17,7 @@ int main(int argc, char* argv[]) {
 
 
 	// Defines global variables
-	controller = new Controller(1900, 1800);
+	controller = new Controller(640, 480);
 
 	window = SDL_CreateWindow(
 		"Apocalypse",

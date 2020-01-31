@@ -14,7 +14,7 @@ World::World(Controller* ctrl, Vector2 size, Vector2 tilesize) {
 
 
 void World::Start() {
-	this->SpawnZombies(64);
+	this->SpawnZombies(4);
 }
 
 void World::Update(float dtime) {
