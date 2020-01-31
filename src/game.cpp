@@ -10,6 +10,8 @@ Game::Game(Controller* ctrl) {
 	this->ctrl->UI = this->UI;
 
 	this->gameplay = new Gameplay(this->ctrl);
+
+	SDL_SetRenderDrawBlendMode(ctrl->renderer, SDL_BLENDMODE_BLEND);
 }
 
 
@@ -34,7 +36,7 @@ void Game::Render() {
 }
 
 void Game::PollEvent(SDL_Event ev) {
-	if (ev.type == SDL_KEYDOWN) if (ev.key.keysym.sym == SDLK_ESCAPE) this->GameOver();
+	// if (ev.type == SDL_KEYDOWN) if (ev.key.keysym.sym == SDLK_ESCAPE) this->GameOver();
 	this->UI->PollEvent(ev);
 	this->gameplay->PollEvent(ev);
 }

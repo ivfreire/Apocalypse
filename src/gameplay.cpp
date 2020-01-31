@@ -2,7 +2,9 @@
 
 Gameplay::Gameplay(Controller* ctrl) {
 	this->ctrl = ctrl;
-	this->world = new World(ctrl);
+	this->world = new World(ctrl, { 1024, 1024 }, { 32, 32 });
+
+	this->state = GameplayState::PLAYING;
 }
 
 
@@ -12,15 +14,32 @@ void Gameplay::Start() {
 }
 
 void Gameplay::Update(float dtime) {
-	this->world->Update(dtime);
+	if (this->state == GameplayState::PLAYING) {
+		this->world->Update(dtime);
+		this->world->PlayerFire();
+	} else {
+		this->background = { 0, 0, (int)this->ctrl->window.x, (int)this->ctrl->window.y };
+	}
 }
 
 void Gameplay::Render(SDL_Renderer* rdr) {
 	this->world->Render(rdr);
-	this->world->PlayerFire();
+	if (this->state == GameplayState::PAUSED) {
+		SDL_SetRenderDrawColor(rdr, 0, 0, 0, 150);
+		SDL_RenderFillRect(rdr, &this->background);
+	}
 }
 
 void Gameplay::PollEvent(SDL_Event ev) {
+	if (ev.type == SDL_KEYDOWN) {
+		if (ev.key.keysym.sym == SDLK_ESCAPE && !this->lockEscape) {
+			if (this->state == GameplayState::PAUSED) this->state = GameplayState::PLAYING;
+			else this->state = GameplayState::PAUSED;
+			this->lockEscape = true;
+		}
+	} else if (ev.type == SDL_KEYUP) {
+		if (ev.key.keysym.sym == SDLK_ESCAPE) this->lockEscape = false;
+	}
 	this->world->PollEvent(ev);
 }
 

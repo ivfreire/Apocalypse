@@ -1,7 +1,7 @@
 #include "main.h"
 
 int main(int argc, char* argv[]) {
-	if (SDL_Init(SDL_INIT_VIDEO) != 0) {
+	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_JOYSTICK) != 0) {
 		std::cout << "Could not load SDL2!" << std::endl;
 		return -1;
 	}
@@ -17,7 +17,7 @@ int main(int argc, char* argv[]) {
 
 
 	// Defines global variables
-	controller = new Controller(800, 600);
+	controller = new Controller(1900, 1800);
 
 	window = SDL_CreateWindow(
 		"Apocalypse",

@@ -7,6 +7,7 @@ class Controller {
 private:
 	Uint32 now, before;
 	float dtime;
+	int fps;
 
 public:
 	Vector2 window;

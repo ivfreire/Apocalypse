@@ -8,6 +8,9 @@ enum class GameplayState { PLAYING, PAUSED };
 class Gameplay {
 private:
 	Controller* ctrl;
+	bool lockEscape;
+
+	SDL_Rect background;
 
 public:
 	World* world;

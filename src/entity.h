@@ -12,8 +12,11 @@ class Entity {
 private:
 	SDL_Rect rect;
 
+	bool destroy;
+	float life, lifetime;
+
 public:
-	std::string title;	
+	std::string title;
 	SDL_Color color;
 
 	Dynamics2 dynamics;
@@ -30,6 +33,10 @@ public:
 
 	void Update(float dtime);
 	void Render(SDL_Renderer* rdr);
+
+	void SetLife(float time);
+	void Kill();
+	bool IsDead();
 
 	~Entity();
 

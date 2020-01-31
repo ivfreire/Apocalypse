@@ -19,6 +19,8 @@ private:
 	Controller* ctrl;
 
 public:
+	Vector2 size, tilesize;
+
 	Player* player;
 
 	Zombie* zombies[MAX_ZOMBIES];
@@ -26,7 +28,7 @@ public:
 
 
 
-	World(Controller* ctrl);
+	World(Controller* ctrl, Vector2 size, Vector2 tilesize);
 
 	void Start();
 	void Update(float dtime);
@@ -40,3 +42,15 @@ public:
 	~World();
 
 };
+
+
+
+/*
+
+
+HASH-MAPS
+
+Entity* hashmap[ZOMBIES + BULLETS + ITEMS][ZOMBIES + BULLETS + ITEMS];
+
+
+*/

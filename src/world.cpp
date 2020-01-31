@@ -1,19 +1,20 @@
 #include "world.h"
 
-World::World(Controller* ctrl) {
+World::World(Controller* ctrl, Vector2 size, Vector2 tilesize) {
 	srand(time(NULL));
 
 	this->ctrl = ctrl;
+	this->size = size;
+	this->tilesize = tilesize;
 
 	this->player = new Player("Player", {0, 0}, ctrl->UI);
-
 	for (int i = 0; i < MAX_ZOMBIES; i++) this->zombies[i] = NULL;
 	for (int i = 0; i < MAX_BULLETS; i++) this->bullets[i] = NULL;
 }
 
 
 void World::Start() {
-	this->SpawnZombies(4);
+	this->SpawnZombies(64);
 }
 
 void World::Update(float dtime) {
@@ -23,7 +24,10 @@ void World::Update(float dtime) {
 		this->zombies[i]->WalkTo(this->player->dynamics.position, 50.0f);
 		this->zombies[i]->Update(dtime);
 	}
-	for (int i = 0; i < MAX_BULLETS; i++) if (this->bullets[i]) this->bullets[i]->Update(dtime);
+	for (int i = 0; i < MAX_BULLETS; i++) if (this->bullets[i]) {
+		this->bullets[i]->Update(dtime);
+		if (this->bullets[i]->IsDead()) this->bullets[i] = NULL;
+	}
 }
 
 void World::Render(SDL_Renderer* rdr) {

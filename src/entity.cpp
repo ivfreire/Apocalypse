@@ -17,10 +17,16 @@ Entity::Entity(std::string title, Vector2 position, Vector2 size, EntityType typ
 	this->speed = 200.0f;
 
 	this->mass = 1.0f;
+
+	this->lifetime = 0.0f;
+	this->life = this->lifetime;
 }
 
 
 void Entity::Update(float dtime) {
+	if (this->life > 0.0f) this->life -= dtime;
+	if (this->life <= 0.0f && this->lifetime > 0.0f) this->Kill();
+
 	this->dynamics.velocity.add(this->dynamics.acceleration, dtime);
 	this->dynamics.position.add(this->dynamics.velocity, dtime);
 
@@ -31,6 +37,15 @@ void Entity::Render(SDL_Renderer* rdr) {
 	SDL_SetRenderDrawColor(rdr, this->color.r, this->color.g, this->color.b, this->color.a);
 	SDL_RenderFillRect(rdr, &this->rect);
 }
+
+
+void Entity::SetLife(float time) {
+	this->lifetime = time;
+	this->life = this->lifetime;
+}
+
+void Entity::Kill() { this->destroy = true; }
+bool Entity::IsDead() { return this->destroy; };
 
 
 Entity::~Entity() {
