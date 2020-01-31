@@ -13,7 +13,7 @@ void Zombie::WalkTo(Vector2 position, float tolerance) {
 		displacent = displacent.unit();
 		displacent.scale(this->speed);
 		this->dynamics.velocity = displacent;
-	}
+	} else this->dynamics.velocity = { 0.0f, 0.0f };
 }
 
 

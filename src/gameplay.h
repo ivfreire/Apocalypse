@@ -3,12 +3,16 @@
 #include "controller.h"
 #include "world.h"
 
+enum class GameplayState { PLAYING, PAUSED };
+
 class Gameplay {
 private:
 	Controller* ctrl;
 
 public:
 	World* world;
+
+	GameplayState state;
 
 
 	Gameplay(Controller* ctrl);

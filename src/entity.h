@@ -6,6 +6,7 @@
 #include "engine.h"
 
 enum class EntityType { PLAYER, ZOMBIE, BULLET };
+enum class Face { NORTH, WEST, SOUTH, EAST };
 
 class Entity {
 private:
@@ -19,7 +20,9 @@ public:
 	Vector2 size;
 
 	float speed;
+	float mass;
 
+	Face facing;
 	EntityType type;
 
 

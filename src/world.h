@@ -9,8 +9,10 @@
 #include "entity.h"
 #include "player.h"
 #include "zombie.h"
+#include "bullet.h"
 
 #define MAX_ZOMBIES	64
+#define MAX_BULLETS 128
 
 class World {
 private:
@@ -20,6 +22,8 @@ public:
 	Player* player;
 
 	Zombie* zombies[MAX_ZOMBIES];
+	Bullet* bullets[MAX_BULLETS];
+
 
 
 	World(Controller* ctrl);
@@ -29,6 +33,8 @@ public:
 	void Render(SDL_Renderer* rdr);
 	void PollEvent(SDL_Event ev);
 
+	void PlayerFire();
+	void SpawnBullet(Weapon* weapon);
 	void SpawnZombies(int population);
 
 	~World();

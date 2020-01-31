@@ -17,6 +17,7 @@ void Gameplay::Update(float dtime) {
 
 void Gameplay::Render(SDL_Renderer* rdr) {
 	this->world->Render(rdr);
+	this->world->PlayerFire();
 }
 
 void Gameplay::PollEvent(SDL_Event ev) {
