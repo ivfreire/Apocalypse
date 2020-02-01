@@ -29,13 +29,17 @@ public:
 	Face facing;
 	EntityType type;
 
+	int health;
+
 	Collider* collider;
 
 
 	Entity(std::string title, Vector2 position, Vector2 size, EntityType type);
 
 	void Update(float dtime);
-	void Render(SDL_Renderer* rdr);
+	void Render(SDL_Renderer* rdr, Vector2 camera);
+
+	void TakeDamage(int damage);
 
 	void SetLife(float time);
 	void Kill();

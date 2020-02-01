@@ -22,6 +22,10 @@ Entity::Entity(std::string title, Vector2 position, Vector2 size, EntityType typ
 	this->life = this->lifetime;
 
 	this->collider = new Collider(&this->dynamics.position, &this->size);
+
+	this->health = 10;
+
+	this->destroy = false;
 }
 
 
@@ -34,13 +38,24 @@ void Entity::Update(float dtime) {
 
 	this->rect = { (int)this->dynamics.position.x, (int)this->dynamics.position.y, (int)this->size.x, (int)this->size.y };
 
-	this->collider->Update(dtime);
+	if (this->health <= 0) this->Kill();
+
+	// this->collider->Update(dtime);
 }
 
-void Entity::Render(SDL_Renderer* rdr) {
+void Entity::Render(SDL_Renderer* rdr, Vector2 camera) {
 	SDL_SetRenderDrawColor(rdr, this->color.r, this->color.g, this->color.b, this->color.a);
-	SDL_RenderFillRect(rdr, &this->rect);
+
+	SDL_Rect new_rect = { (int)(this->rect.x - camera.x), (int)(this->rect.y - camera.y), this->rect.w, this->rect.h };
+	this->collider->SetRect(new_rect);
+
+	SDL_RenderFillRect(rdr, &new_rect);
 	this->collider->Render(rdr);
+}
+
+
+void Entity::TakeDamage(int damage) {
+	this->health -= damage;
 }
 
 

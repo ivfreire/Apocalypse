@@ -5,7 +5,14 @@ int main(int argc, char* argv[]) {
 		std::cout << "Could not load SDL2!" << std::endl;
 		return -1;
 	}
-
+	if (TTF_Init() != 0) {
+		std::cout << "Could not load TTF library of SDL2!" << std::endl;
+		return -1;
+	}
+	if (IMG_Init(IMG_INIT_JPG | IMG_INIT_PNG) == 0) {
+		std::cout << "Could not load SDL_image library of SDL2!" << std::endl;
+		return -1;
+	}
 
 
 	// Instanciates global variables
@@ -17,14 +24,14 @@ int main(int argc, char* argv[]) {
 
 
 	// Defines global variables
-	controller = new Controller(640, 480);
+	controller = new Controller(1920, 1080);
 
 	window = SDL_CreateWindow(
 		"Apocalypse",
 		SDL_WINDOWPOS_CENTERED,
 		SDL_WINDOWPOS_CENTERED,
 		controller->window.x, controller->window.y,
-		SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE
+		SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE // | SDL_WINDOW_FULLSCREEN
 	);
 	if (!window) {
 		std::cout << "Could not create window!" << std::endl;
@@ -57,10 +64,14 @@ int main(int argc, char* argv[]) {
 
 
 	// Free up space
+	game->~Game();
+	controller->~Controller();
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(window);
 
 
+	IMG_Quit();
+	TTF_Quit();
 	SDL_Quit();
 	return 0;
 }

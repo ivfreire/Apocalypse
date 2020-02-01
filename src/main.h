@@ -3,6 +3,8 @@
 #include <iostream>
 #include <thread>
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_ttf.h>
+#include <SDL2/SDL_image.h>
 #include "engine.h"
 #include "controller.h"
 #include "game.h"

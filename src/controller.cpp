@@ -3,7 +3,25 @@
 Controller::Controller(int width, int height) {
 	this->window = { (float)width, (float)height };
 
-	this->showHitboxes = true;
+	this->font = TTF_OpenFont("res/fonts/retro_gaming.ttf", 16);
+	if (this->font == NULL) std::cerr << "ERROR" << std::endl;
+
+	this->debugRect = { 10, 10, 300, 400 };
+
+	this->showDebugInfo = false;
+}
+
+
+void Controller::Update(float dtime) {
+	
+}
+
+void Controller::Render(SDL_Renderer* rdr) {
+	if (this->showDebugInfo) {
+		SDL_SetRenderDrawColor(rdr, 0, 0, 0, 100);
+		SDL_RenderFillRect(rdr, &this->debugRect);
+
+	}
 }
 
 
@@ -31,5 +49,5 @@ float Controller::GetDeltaTime() {
 
 
 Controller::~Controller() {
-
+	TTF_CloseFont(this->font);
 }

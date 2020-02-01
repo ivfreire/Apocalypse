@@ -32,7 +32,7 @@ void Gameplay::Render(SDL_Renderer* rdr) {
 
 void Gameplay::PollEvent(SDL_Event ev) {
 	if (ev.type == SDL_KEYDOWN) {
-		if (ev.key.keysym.sym == SDLK_F3) this->ctrl->showHitboxes = true; //!this->ctrl->showHitboxes;
+		if (ev.key.keysym.sym == SDLK_F3) this->ctrl->showDebugInfo = true;
 		if (ev.key.keysym.sym == SDLK_ESCAPE && !this->lockEscape) {
 			if (this->state == GameplayState::PAUSED) this->state = GameplayState::PLAYING;
 			else this->state = GameplayState::PAUSED;
@@ -40,6 +40,7 @@ void Gameplay::PollEvent(SDL_Event ev) {
 		}
 	} else if (ev.type == SDL_KEYUP) {
 		if (ev.key.keysym.sym == SDLK_ESCAPE) this->lockEscape = false;
+		if (ev.key.keysym.sym == SDLK_F3) this->ctrl->showDebugInfo = false;
 	}
 	this->world->PollEvent(ev);
 }

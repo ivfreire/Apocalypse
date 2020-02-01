@@ -1,8 +1,10 @@
 #include "zombie.h"
 
-Zombie::Zombie(std::string title, Vector2 position) : Entity(title, position, { 50.0f, 50.0f }, EntityType::ZOMBIE) {
+Zombie::Zombie(std::string title, Vector2 position) : Entity(title, position, { 32.0f, 32.0f }, EntityType::ZOMBIE) {
 	this->color = { 255, 0, 0, 255 };
 	this->speed = 50.0f;
+
+	this->health = 1;
 }
 
 

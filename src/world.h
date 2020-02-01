@@ -5,11 +5,13 @@
 #include <random>
 #include <ctime>
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
 #include "controller.h"
 #include "entity.h"
 #include "player.h"
 #include "zombie.h"
 #include "bullet.h"
+#include "camera.h"
 
 #define MAX_ZOMBIES	64
 #define MAX_BULLETS 128
@@ -21,8 +23,9 @@ private:
 public:
 	Vector2 size, tilesize;
 
-	Player* player;
+	Camera* camera;
 
+	Player* player;
 	Zombie* zombies[MAX_ZOMBIES];
 	Bullet* bullets[MAX_BULLETS];
 
@@ -38,6 +41,7 @@ public:
 	void PlayerFire();
 	void SpawnBullet(Weapon* weapon);
 	void SpawnZombies(int population);
+	void CheckCollisions();
 
 	~World();
 

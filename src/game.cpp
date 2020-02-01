@@ -31,6 +31,7 @@ void Game::Render() {
 	SDL_RenderClear(this->rdr);
 
 	this->gameplay->Render(this->rdr);
+	this->ctrl->Render(this->rdr);
 
 	SDL_RenderPresent(this->rdr);
 }

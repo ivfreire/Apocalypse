@@ -17,6 +17,10 @@ public:
 	void Update(float dtime);
 	void Render(SDL_Renderer* rdr);
 
+	bool CheckCollision(Collider* other);
+
+	void SetRect(SDL_Rect);
+
 	~Collider();
 
 };

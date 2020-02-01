@@ -1,10 +1,10 @@
 #include "player.h"
 
-Player::Player(std::string title, Vector2 position, UserInterface* UI) : Entity(title, position, { 50.0f, 50.0f }, EntityType::PLAYER) {
+Player::Player(std::string title, Vector2 position, UserInterface* UI) : Entity(title, position, { 32.0f, 32.0f }, EntityType::PLAYER) {
 	this->color = { 0, 0, 0, 255 };
 	this->UI = UI;
 
-	this->weapon = new Weapon("USP", &this->dynamics.position, &this->size, &this->facing, 10, 16, 500.0f, 1.0f, 0.2f, 2.0f);
+	this->weapon = new Weapon("USP", &this->dynamics.position, &this->size, &this->facing, 10, 16, 1000.0f, 1.0f, 0.1f, 2.0f);
 	this->weapon->infinite = true;
 }
 

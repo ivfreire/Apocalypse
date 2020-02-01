@@ -16,6 +16,25 @@ void Collider::Render(SDL_Renderer* rdr) {
 }
 
 
+bool Collider::CheckCollision(Collider* other) {
+	float radius = (this->size->x + this->size->y) / 4;
+	float otherRadius = (other->size->x + other->size->y) / 4;
+
+	Vector2 distance = *other->position;
+	distance.add(*other->size, 0.5f);
+	distance.add(*this->position, -1.0f);
+	distance.add(*this->size, -0.5f);
+
+	if (distance.module() <= (radius + otherRadius)) return true;
+	else return false;
+}
+
+
+void Collider::SetRect(SDL_Rect rect) {
+	this->rect = rect;
+}
+
+
 Collider::~Collider() {
 
 }

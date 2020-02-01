@@ -7,7 +7,7 @@ Bullet::Bullet(Vector2 position, Face facing, float speed, float mass) : Entity(
 
 	this->color = { 0, 0, 255, 255 };
 
-	this->SetLife(5.0f);
+	this->SetLife(1.0f);
 
 	this->SetVelocity();
 }
@@ -18,7 +18,9 @@ Bullet::Bullet(Weapon* weapon) : Entity("Bullet", weapon->bulletSpawn, weapon->b
 
 	this->color = { 0, 0, 255, 255 };
 
-	this->SetLife(5.0f);
+	this->SetLife(1.0f);
+
+	this->health = 1;
 
 	this->SetVelocity();
 }
@@ -30,6 +32,12 @@ void Bullet::SetVelocity() {
 	if (this->facing == Face::WEST) this->dynamics.velocity.set(Axis::HORIZONTAL,	-this->speed);
 	if (this->facing == Face::SOUTH) this->dynamics.velocity.set(Axis::VERTICAL,	 this->speed);
 	if (this->facing == Face::EAST) this->dynamics.velocity.set(Axis::HORIZONTAL,	 this->speed);
+}
+
+
+
+void Bullet::OnCollision() {
+	this->Kill();
 }
 
 

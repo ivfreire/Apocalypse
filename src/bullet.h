@@ -15,6 +15,8 @@ public:
 
 	void SetVelocity();
 
+	void OnCollision();
+
 	~Bullet();
 
 };

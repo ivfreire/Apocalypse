@@ -1,5 +1,6 @@
 #pragma once
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_ttf.h>
 #include "engine.h"
 #include "userinterface.h"
 
@@ -9,6 +10,8 @@ private:
 	float dtime;
 	int fps;
 
+	SDL_Rect debugRect;
+
 public:
 	Vector2 window;
 
@@ -17,10 +20,15 @@ public:
 
 	UserInterface* UI;
 
-	bool showHitboxes;
+	TTF_Font* font;
+
+	bool showDebugInfo;
 
 
 	Controller(int width, int height);
+
+	void Update(float dtime);
+	void Render(SDL_Renderer* rdr);
 
 	void SetWindowSize();
 
