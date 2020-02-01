@@ -13,10 +13,8 @@ Apocalypse is a simple game developed in C/C++ using SDL2 library for video rend
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the GNU License - see the [LICENSE.md](LICENSE.md) file for details
 
 ## Acknowledgments
 
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
+* Hackerspace of the Institute of Physics of the University of São Paulo
