@@ -14,6 +14,8 @@ private:
 public:
 	Weapon* weapon, * secWeapon;
 
+	int points, money, kills;
+
 
 	Player(std::string title, Vector2 position, UserInterface* UI);
 

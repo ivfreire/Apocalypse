@@ -10,6 +10,10 @@ private:
 
 
 public:
+	int damage;
+	int id;
+
+
 	Bullet(Vector2 position, Face facing, float speed, float mass);
 	Bullet(Weapon* weapon);
 

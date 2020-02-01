@@ -6,6 +6,8 @@
 #include "gameplay.h"
 #include "userinterface.h"
 
+enum class GameState { MAINMENU, GAMEPLAY };
+
 class Game {
 private:
 	Controller* ctrl;
@@ -14,6 +16,8 @@ private:
 	SDL_Renderer* rdr;
 
 public:
+	GameState state;
+
 	Gameplay* gameplay;
 
 	UserInterface* UI;

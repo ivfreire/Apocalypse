@@ -40,6 +40,7 @@ public:
 	void Render(SDL_Renderer* rdr, Vector2 camera);
 
 	void TakeDamage(int damage);
+	void SetPosition(Vector2 position);
 
 	void SetLife(float time);
 	void Kill();

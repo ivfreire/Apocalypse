@@ -1,6 +1,8 @@
 #include "game.h"
 
 Game::Game(Controller* ctrl) {
+	this->state = GameState::GAMEPLAY;
+
 	this->ctrl = ctrl;
 	this->rdr = this->ctrl->renderer;
 

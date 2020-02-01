@@ -2,21 +2,27 @@
 
 Gameplay::Gameplay(Controller* ctrl) {
 	this->ctrl = ctrl;
+
 	this->world = new World(ctrl, { 1024, 1024 }, { 32, 32 });
 
 	this->state = GameplayState::PLAYING;
+
+	this->round = 0;
 }
 
 
 
 void Gameplay::Start() {
 	this->world->Start();
+	this->world->InitPlayers(500);
 }
 
 void Gameplay::Update(float dtime) {
 	if (this->state == GameplayState::PLAYING) {
 		this->world->Update(dtime);
 		this->world->PlayerFire();
+
+		this->RoundControl();
 	} else {
 		this->background = { 0, 0, (int)this->ctrl->window.x, (int)this->ctrl->window.y };
 	}
@@ -45,6 +51,21 @@ void Gameplay::PollEvent(SDL_Event ev) {
 	this->world->PollEvent(ev);
 }
 
+
+void Gameplay::RoundControl() {
+	if (this->world->kills == this->ZombiesSpawnNumber(this->round)) this->NewRound();
+}
+
+void Gameplay::NewRound() {
+	this->round += 1;
+	int zombies = this->ZombiesSpawnNumber(this->round);
+	this->world->NewRound(zombies, this->round);
+	std::cout << "New Round: " << this->round << std::endl;
+}
+
+int Gameplay::ZombiesSpawnNumber(int round) {
+	return 5 * round;
+}
 
 
 Gameplay::~Gameplay() {

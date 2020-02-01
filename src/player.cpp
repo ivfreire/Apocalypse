@@ -5,6 +5,7 @@ Player::Player(std::string title, Vector2 position, UserInterface* UI) : Entity(
 	this->UI = UI;
 
 	this->weapon = new Weapon("USP", &this->dynamics.position, &this->size, &this->facing, 10, 16, 1000.0f, 1.0f, 0.1f, 2.0f);
+	this->weapon->id = 0;
 	this->weapon->infinite = true;
 }
 

@@ -58,6 +58,8 @@ void Entity::TakeDamage(int damage) {
 	this->health -= damage;
 }
 
+void Entity::SetPosition(Vector2 position) { this->dynamics.position = position; }
+
 
 void Entity::SetLife(float time) {
 	this->lifetime = time;

@@ -3,6 +3,8 @@
 #include "controller.h"
 #include "world.h"
 
+#define MAX_PLAYERS	4
+
 enum class GameplayState { PLAYING, PAUSED };
 
 class Gameplay {
@@ -15,6 +17,8 @@ private:
 public:
 	World* world;
 
+	int round;
+
 	GameplayState state;
 
 
@@ -24,6 +28,10 @@ public:
 	void Update(float dtime);
 	void Render(SDL_Renderer* rdr);
 	void PollEvent(SDL_Event ev);
+
+	void RoundControl();
+	void NewRound();
+	int ZombiesSpawnNumber(int round);
 
 	~Gameplay();
 

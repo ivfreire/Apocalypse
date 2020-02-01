@@ -19,6 +19,12 @@ void Zombie::WalkTo(Vector2 position, float tolerance) {
 }
 
 
+void Zombie::TakeDamage(int damage, int id) {
+	Entity::TakeDamage(damage);
+	this->id = id;
+}
+
+
 Zombie::~Zombie() {
 
 }

@@ -22,6 +22,7 @@ public:
 	float cooldown[1];
 
 	Face* facing;
+	int id;
 
 	int maxPaint, ammoPerPaint;
 	int currAmmo, currPaint;

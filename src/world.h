@@ -15,10 +15,13 @@
 
 #define MAX_ZOMBIES	64
 #define MAX_BULLETS 128
+#define MAX_PLAYERS	4
 
 class World {
 private:
 	Controller* ctrl;
+	int totalZombies, spawnedZombies;
+	int round;
 
 public:
 	Vector2 size, tilesize;
@@ -29,6 +32,7 @@ public:
 	Zombie* zombies[MAX_ZOMBIES];
 	Bullet* bullets[MAX_BULLETS];
 
+	int kills;
 
 
 	World(Controller* ctrl, Vector2 size, Vector2 tilesize);
@@ -38,10 +42,16 @@ public:
 	void Render(SDL_Renderer* rdr);
 	void PollEvent(SDL_Event ev);
 
+	void InitPlayers(int money);
+
 	void PlayerFire();
 	void SpawnBullet(Weapon* weapon);
 	void SpawnZombies(int population);
+	void SpawnMissingZombies(int index);
 	void CheckCollisions();
+
+	void NewRound(int zombies, int round);
+	Zombie* RoundZombie(int round);
 
 	~World();
 
