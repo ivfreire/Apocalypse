@@ -12,6 +12,7 @@
 #include "zombie.h"
 #include "bullet.h"
 #include "camera.h"
+#include "map.h"
 
 #define MAX_ZOMBIES	64
 #define MAX_BULLETS 128
@@ -23,8 +24,11 @@ private:
 	int totalZombies, spawnedZombies;
 	int round;
 
+	SDL_Rect frontiers;
+
 public:
 	Vector2 size, tilesize;
+	Map* map;
 
 	Camera* camera;
 
@@ -35,7 +39,7 @@ public:
 	int kills;
 
 
-	World(Controller* ctrl, Vector2 size, Vector2 tilesize);
+	World(Controller* ctrl, std::string path);
 
 	void Start();
 	void Update(float dtime);
@@ -43,12 +47,14 @@ public:
 	void PollEvent(SDL_Event ev);
 
 	void InitPlayers(int money);
+	bool IsPlayerDead();
 
 	void PlayerFire();
 	void SpawnBullet(Weapon* weapon);
 	void SpawnZombies(int population);
 	void SpawnMissingZombies(int index);
 	void CheckCollisions();
+	void KeepPlayerIn(Dynamics2* dynamics, Vector2 size);
 
 	void NewRound(int zombies, int round);
 	Zombie* RoundZombie(int round);

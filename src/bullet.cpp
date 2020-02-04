@@ -6,7 +6,7 @@ Bullet::Bullet(Vector2 position, Face facing, float speed, float mass) : Entity(
 	this->facing = facing;
 
 	this->color = { 0, 0, 255, 255 };
-	this->damage = 1;
+	this->damage = 1000;
 
 	this->SetLife(1.0f);
 
@@ -18,7 +18,7 @@ Bullet::Bullet(Weapon* weapon) : Entity("Bullet", weapon->bulletSpawn, weapon->b
 	this->speed = weapon->bulletSpeed;
 
 	this->color = { 0, 0, 255, 255 };
-	this->damage = 1;
+	this->damage = 1000;
 
 	this->id = weapon->id;
 

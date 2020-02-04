@@ -4,9 +4,11 @@ Player::Player(std::string title, Vector2 position, UserInterface* UI) : Entity(
 	this->color = { 0, 0, 0, 255 };
 	this->UI = UI;
 
-	this->weapon = new Weapon("USP", &this->dynamics.position, &this->size, &this->facing, 10, 16, 1000.0f, 1.0f, 0.1f, 2.0f);
+	this->weapon = new Weapon("USP", &this->dynamics.position, &this->size, &this->facing, 10, 16, 1000.0f, 1.0f, 0.01f, 2.0f);
 	this->weapon->id = 0;
 	this->weapon->infinite = true;
+
+	this->health = 4;
 }
 
 
@@ -14,6 +16,8 @@ void Player::Update(float dtime) {
 	this->Movement(dtime);
 	this->SetFacing();
 	this->weapon->Update(dtime);
+
+	this->Regenerate(0.1f, dtime);
 
 	Entity::Update(dtime);
 }
@@ -47,6 +51,17 @@ void Player::SetFacing() {
 		if (this->dynamics.velocity.get(Axis::VERTICAL)   > 0) this->facing = Face::SOUTH;
 		if (this->dynamics.velocity.get(Axis::HORIZONTAL) > 0) this->facing = Face::EAST;
 	}
+}
+
+void Player::TakeDamage(float damage) {
+	Entity::TakeDamage(damage);
+	// std::cout << this->health << std::endl;
+}
+
+
+void Player::Regenerate(float rate, float dtime) {
+	if (this->health < 4.0f && this->health > 0.0f) this->health += rate * dtime;
+	if (this->health > 4.0f) this->health = 4.0f;
 }
 
 

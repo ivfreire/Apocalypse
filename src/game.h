@@ -5,6 +5,7 @@
 #include "controller.h"
 #include "gameplay.h"
 #include "userinterface.h"
+#include "gui.h"
 
 enum class GameState { MAINMENU, GAMEPLAY };
 
@@ -14,6 +15,8 @@ private:
 	bool running;
 
 	SDL_Renderer* rdr;
+
+	GUI* gui;
 
 public:
 	GameState state;

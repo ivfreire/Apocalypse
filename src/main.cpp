@@ -38,7 +38,7 @@ int main(int argc, char* argv[]) {
 		return -1;
 	}
 
-	renderer = SDL_CreateRenderer(window, -1, 0);
+	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 	if (!renderer) {
 		std::cout << "Could not create renderer!" << std::endl;
 		return -1;
@@ -59,6 +59,7 @@ int main(int argc, char* argv[]) {
 	threads[0] = std::thread(Update, game);
 	threads[1] = std::thread(Render, game);
 	threads[2] = std::thread(PollEvent, game);
+	// threads[3] = std::thread(Command, game);
 
 	for (int i = 0; i < MAX_THREADS; i++) threads[i].join();
 
@@ -95,5 +96,16 @@ void PollEvent(Game* game) {
 		SDL_PollEvent(&ev);
 		game->PollEvent(ev);
 		if (ev.type == SDL_QUIT) game->GameOver();
+	}
+}
+
+void Command(Game* game) {
+	while (!game->IsOver()) {
+		std::string command;
+		std::cout << ">>>: ";
+		std::cin >> command;
+		if (command == "exit") game->GameOver();
+		if (command == "pause") game->gameplay->state = GameplayState::PAUSED;
+		if (command == "play") game->gameplay->state = GameplayState::PLAYING;
 	}
 }

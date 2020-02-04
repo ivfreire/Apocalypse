@@ -24,6 +24,9 @@ public:
 
 	void Movement(float dtime);
 	void SetFacing();
+	void TakeDamage(float damage);
+
+	void Regenerate(float rate, float dtime);
 
 	~Player();
 

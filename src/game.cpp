@@ -11,9 +11,11 @@ Game::Game(Controller* ctrl) {
 	this->UI = new UserInterface();
 	this->ctrl->UI = this->UI;
 
+	this->gui = new GUI(&ctrl->window);
 	this->gameplay = new Gameplay(this->ctrl);
+	this->gameplay->current = &this->gui->current;
 
-	SDL_SetRenderDrawBlendMode(ctrl->renderer, SDL_BLENDMODE_BLEND);
+	this->gui->screens[0] = this->gameplay->menu;
 }
 
 
@@ -26,6 +28,7 @@ void Game::Update() {
 	this->ctrl->CalculateFrameRate();
 	this->gameplay->Update(this->ctrl->GetDeltaTime());
 	this->ctrl->SetWindowSize();
+	this->gui->Update(this->ctrl->GetDeltaTime());
 }
 
 void Game::Render() {
@@ -33,6 +36,7 @@ void Game::Render() {
 	SDL_RenderClear(this->rdr);
 
 	this->gameplay->Render(this->rdr);
+	this->gui->Render(this->ctrl->renderer);
 	this->ctrl->Render(this->rdr);
 
 	SDL_RenderPresent(this->rdr);
@@ -56,5 +60,5 @@ bool Game::IsOver() {
 
 
 Game::~Game() {
-
+	this->gui->~GUI();
 }

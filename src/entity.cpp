@@ -54,7 +54,7 @@ void Entity::Render(SDL_Renderer* rdr, Vector2 camera) {
 }
 
 
-void Entity::TakeDamage(int damage) {
+void Entity::TakeDamage(float damage) {
 	this->health -= damage;
 }
 

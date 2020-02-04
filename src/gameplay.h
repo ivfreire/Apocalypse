@@ -2,10 +2,12 @@
 
 #include "controller.h"
 #include "world.h"
+#include "screen.h"
+#include "text.h"
 
 #define MAX_PLAYERS	4
 
-enum class GameplayState { PLAYING, PAUSED };
+enum class GameplayState { PLAYING, PAUSED, GAMEOVER };
 
 class Gameplay {
 private:
@@ -18,7 +20,9 @@ public:
 	World* world;
 
 	int round;
+	int* current;
 
+	Screen* menu;
 	GameplayState state;
 
 

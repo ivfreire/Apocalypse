@@ -7,7 +7,7 @@
 
 class Zombie : public Entity {
 private:
-
+	float buffer;
 
 public:
 	int id;
@@ -15,9 +15,12 @@ public:
 
 	Zombie(std::string title, Vector2 position);
 
+	void Update(float dtime);
+
 	void WalkTo(Vector2 position, float tolerance);
 
-	void TakeDamage(int damage, int id);
+	bool DealDamage();
+	void TakeDamage(float damage, int id);
 
 	~Zombie();
 

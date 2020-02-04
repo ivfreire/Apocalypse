@@ -29,7 +29,7 @@ public:
 	Face facing;
 	EntityType type;
 
-	int health;
+	float health;
 
 	Collider* collider;
 
@@ -39,7 +39,7 @@ public:
 	void Update(float dtime);
 	void Render(SDL_Renderer* rdr, Vector2 camera);
 
-	void TakeDamage(int damage);
+	void TakeDamage(float damage);
 	void SetPosition(Vector2 position);
 
 	void SetLife(float time);

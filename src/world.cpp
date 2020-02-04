@@ -1,11 +1,15 @@
 #include "world.h"
 
-World::World(Controller* ctrl, Vector2 size, Vector2 tilesize) {
+World::World(Controller* ctrl, std::string path) {
 	srand(time(NULL));
 
 	this->ctrl = ctrl;
-	this->size = size;
-	this->tilesize = tilesize;
+
+	this->map = new Map(path);
+	this->map->tilesets[0]->texture = SDL_CreateTextureFromSurface(ctrl->renderer, this->map->tilesets[0]->tiles[0]);
+
+	this->size = { (float)1024, (float)1024 };
+	this->frontiers = { 0, 0, (int)this->size.x, (int)this->size.y };
 
 	this->camera = new Camera("Main Camera", { 0.0f, 0.0f }, &this->ctrl->window);
 
@@ -22,8 +26,10 @@ void World::Start() {
 }
 
 void World::Update(float dtime) {
+	this->map->Update(dtime);
 	this->CheckCollisions();
 
+	this->KeepPlayerIn(&this->player->dynamics, this->player->size);
 	this->player->Update(dtime);
 	for (int i = 0; i < MAX_ZOMBIES; i++) if (this->zombies[i]) {
 		this->zombies[i]->WalkTo(this->player->dynamics.position, 32.0f);
@@ -41,15 +47,23 @@ void World::Update(float dtime) {
 		if (this->bullets[i]->IsDead()) this->bullets[i] = NULL;
 	}
 
-	/*Vector2 center = this->player->dynamics.position;
+	Vector2 center = this->player->dynamics.position;
 	center.add(this->player->size, 0.5f);
-	this->camera->CenterAt(center);*/
+	this->camera->CenterAt(center);
+
+	this->frontiers.x = -this->camera->position.x;
+	this->frontiers.y = -this->camera->position.y;
 }
 
 void World::Render(SDL_Renderer* rdr) {
+	this->map->Render(rdr);
+
 	this->player->Render(rdr, this->camera->position);
 	for (int i = 0; i < MAX_ZOMBIES; i++) if (this->zombies[i]) this->zombies[i]->Render(rdr, this->camera->position);
 	for (int i = 0; i < MAX_BULLETS; i++) if (this->bullets[i]) this->bullets[i]->Render(rdr, this->camera->position);
+
+	SDL_SetRenderDrawColor(rdr, 255, 0, 0, 255);
+	SDL_RenderDrawRect(rdr, &this->frontiers);
 }
 
 void World::PollEvent(SDL_Event ev) {
@@ -62,6 +76,8 @@ void World::InitPlayers(int money) {
 	this->player->money = money;
 	this->player->points = money;
 }
+
+bool World::IsPlayerDead() { return this->player->IsDead(); }
 
 
 void World::PlayerFire() {
@@ -81,7 +97,7 @@ void World::SpawnZombies(int population) {
 	for (int i = 0; i < population; i++) {
 		bool found = false;
 		for (int j = 0; j < MAX_ZOMBIES && !found; j++) if (this->zombies[j] == NULL) {
-			Vector2 position = { (float)(rand() % (int)ctrl->window.x), (float)(rand() % (int)this->ctrl->window.y) };
+			Vector2 position = { (float)(rand() % (int)this->size.x), (float)(rand() % (int)this->size.y) };
 			this->zombies[j] = this->RoundZombie(this->round);
 			this->zombies[j]->SetPosition(position);
 			found = true;
@@ -93,7 +109,7 @@ void World::SpawnZombies(int population) {
 
 void World::SpawnMissingZombies(int index) {
 	if (this->totalZombies > MAX_ZOMBIES && this->spawnedZombies < this->totalZombies) {
-		Vector2 position = { (float)(rand() % (int)ctrl->window.x), (float)(rand() % (int)this->ctrl->window.y) };
+		Vector2 position = { (float)(rand() % (int)this->size.x), (float)(rand() % (int)this->size.y) };
 		this->zombies[index] = this->RoundZombie(this->round);
 		this->zombies[index]->SetPosition(position);
 		this->spawnedZombies += 1;
@@ -102,12 +118,19 @@ void World::SpawnMissingZombies(int index) {
 
 void World::CheckCollisions() {
 	for (int i = 0; i < MAX_ZOMBIES; i++) if (this->zombies[i]) {
-		if (this->zombies[i]->collider->CheckCollision(this->player->collider)) this->player->TakeDamage(1);
+		if (this->zombies[i]->collider->CheckCollision(this->player->collider)) if (this->zombies[i]->DealDamage()) this->player->TakeDamage(1);
 		for (int j = 0; j < MAX_BULLETS; j++) if (this->bullets[j]) if (!this->bullets[j]->IsDead()) if (this->zombies[i]->collider->CheckCollision(this->bullets[j]->collider)) {
 			this->zombies[i]->TakeDamage(this->bullets[j]->damage, this->bullets[j]->id);
 			this->bullets[j]->OnCollision();
 		}
 	}
+}
+
+void World::KeepPlayerIn(Dynamics2* dynamics, Vector2 size) {
+	if (dynamics->position.x <= 0 && dynamics->velocity.x < 0) { dynamics->velocity.x = 0; dynamics->position.x = 0; }
+	if (dynamics->position.y <= 0 && dynamics->velocity.y < 0) { dynamics->velocity.y = 0; dynamics->position.y = 0; }
+	if (dynamics->position.x + size.x >= this->size.x && dynamics->velocity.x > 0) { dynamics->velocity.x = 0; dynamics->position.x = this->size.x - size.x; }
+	if (dynamics->position.y + size.y >= this->size.y && dynamics->velocity.y > 0) { dynamics->velocity.y = 0; dynamics->position.y = this->size.y - size.y; }
 }
 
 

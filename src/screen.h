@@ -1,0 +1,32 @@
+#pragma once
+
+#include <iostream>
+#include <string>
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_ttf.h>
+#include <SDL2/SDL_image.h>
+#include "engine.h"
+#include "graph.h"
+
+#define MAX_GRAPHS	32
+#define MAX_FONTS	4
+
+class Screen {
+private:
+	Vector2* window;
+
+public:
+	Graph* graphs[MAX_GRAPHS];
+	TTF_Font* fonts[MAX_FONTS];
+
+
+	Screen(Vector2* window);
+
+	void Update(float dtime);
+	void Render(SDL_Renderer* rdr);
+
+	void LoadFont(std::string path, int size);
+
+	~Screen();
+
+};

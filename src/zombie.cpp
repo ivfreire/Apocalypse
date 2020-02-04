@@ -8,6 +8,14 @@ Zombie::Zombie(std::string title, Vector2 position) : Entity(title, position, { 
 }
 
 
+void Zombie::Update(float dtime) {
+	Entity::Update(dtime);
+
+	if (buffer > 0.0f) this->buffer -= dtime;
+	if (buffer < 0.0f) this->buffer = 0.0f;
+}
+
+
 void Zombie::WalkTo(Vector2 position, float tolerance) {
 	Vector2 displacent = position;
 	displacent.add(this->dynamics.position, -1.0f);
@@ -19,7 +27,14 @@ void Zombie::WalkTo(Vector2 position, float tolerance) {
 }
 
 
-void Zombie::TakeDamage(int damage, int id) {
+bool Zombie::DealDamage() {
+	if (buffer == 0.0f) {
+		this->buffer = 0.75f;
+		return true;
+	} else return false;
+}
+
+void Zombie::TakeDamage(float damage, int id) {
 	Entity::TakeDamage(damage);
 	this->id = id;
 }

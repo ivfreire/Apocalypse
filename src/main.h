@@ -17,3 +17,4 @@ int main(int argc, char* argv[]);
 void Update(Game* game);
 void Render(Game* game);
 void PollEvent(Game* game);
+void Command(Game* game);
