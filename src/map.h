@@ -9,9 +9,6 @@
 #include "tileset.h"
 #include "camera.h"
 
-#define MAX_TILESETS	4
-#define MAX_WORLDSIZE	1024
-
 
 struct Layer {
 	int id;

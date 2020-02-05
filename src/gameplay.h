@@ -22,7 +22,7 @@ public:
 	int round;
 	int* current;
 
-	Screen* menu;
+	Screen* menu, * hud;
 	GameplayState state;
 
 
