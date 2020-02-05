@@ -17,7 +17,7 @@ public:
 
 	Camera(std::string title, Vector2 position, Vector2* screen);
 
-	void CenterAt(Vector2 position);
+	void CenterAt(Vector2 position, Vector2 world_size);
 
 	~Camera();
 

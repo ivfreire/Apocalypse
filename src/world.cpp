@@ -49,7 +49,7 @@ void World::Update(float dtime) {
 
 	Vector2 center = this->player->dynamics.position;
 	center.add(this->player->size, 0.5f);
-	this->camera->CenterAt(center);
+	this->camera->CenterAt(center, this->size);
 
 	this->frontiers.x = -this->camera->position.x;
 	this->frontiers.y = -this->camera->position.y;
