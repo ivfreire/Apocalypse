@@ -10,6 +10,35 @@ Currently, the game is still under development and looks like this:
 
 The graphics are not completed yet and most of the image above is just placeholder for future graphics.
 
+### Requirements
+
+To build an run this project on linux, you must have installed on your computer the following packages
+
+'''
+libsdl2-2.0-0
+libsdl2-dev
+libsdl2-image-2.0-0
+libsdl2-image-dev
+libsdl2-ttf-2.0-0
+libsdl2-ttf-dev
+'''
+
+# Build
+
+On Deabian/Ubuntu, these packages can be installed with the command
+
+'''
+$ sudo apt-get install ibsdl2-2.0-0 libsdl2-dev libsdl2-image-2.0-0 libsdl2-image-dev libsdl2-ttf-2.0-0 libsdl2-ttf-dev
+'''
+
+Then, on the repository root, you should run
+
+'''
+$ make
+'''
+
+Now exist a new executable file on the root, apocalypse.o! Run this file and the game will launch.
+
 ## Built With
 
 * [SDL2.0](https://https://www.libsdl.org/) - Simple DirectMedia Layer
