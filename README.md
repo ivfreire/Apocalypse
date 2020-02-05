@@ -14,14 +14,14 @@ The graphics are not completed yet and most of the image above is just placehold
 
 To build an run this project on linux, you must have installed on your computer the following packages
 
-"""
+```
 libsdl2-2.0-0
 libsdl2-dev
 libsdl2-image-2.0-0
 libsdl2-image-dev
 libsdl2-ttf-2.0-0
 libsdl2-ttf-dev
-"""
+```
 
 # Build
 
