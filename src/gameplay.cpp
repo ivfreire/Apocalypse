@@ -2,7 +2,7 @@
 
 Gameplay::Gameplay(Controller* ctrl) {
 	this->ctrl = ctrl;
-	this->world = new World(ctrl, "maps/lobby.xml");
+	this->world = new World(ctrl, "maps/test_scene2.xml");
 	this->state = GameplayState::PLAYING;
 	this->round = 0;
 

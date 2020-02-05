@@ -8,7 +8,7 @@ World::World(Controller* ctrl, std::string path) {
 	this->map = new Map(path);
 	this->map->RenderLayers(ctrl->renderer);
 
-	this->size = { (float)1024, (float)1024 };
+	this->size = { (float)(this->map->width * this->map->tilewidth), (float)(this->map->height * this->map->tileheight)	 };
 	this->frontiers = { 0, 0, (int)this->size.x, (int)this->size.y };
 
 	this->camera = new Camera("Main Camera", { 0.0f, 0.0f }, &this->ctrl->window);
@@ -22,7 +22,7 @@ World::World(Controller* ctrl, std::string path) {
 
 
 void World::Start() {
-
+	this->player->dynamics.position = { (float)this->size.x / 2, (float)this->size.y / 2 };
 }
 
 void World::Update(float dtime) {
@@ -56,6 +56,7 @@ void World::Update(float dtime) {
 }
 
 void World::Render(SDL_Renderer* rdr) {
+	SDL_RenderSetScale(rdr, this->camera->scale.x, this->camera->scale.y);
 	this->map->Render(rdr, this->camera->position);
 
 	this->player->Render(rdr, this->camera->position);
@@ -64,6 +65,8 @@ void World::Render(SDL_Renderer* rdr) {
 
 	SDL_SetRenderDrawColor(rdr, 255, 0, 0, 255);
 	SDL_RenderDrawRect(rdr, &this->frontiers);
+
+	SDL_RenderSetScale(rdr, 1.0f, 1.0f);
 }
 
 void World::PollEvent(SDL_Event ev) {

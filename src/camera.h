@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <string>
+#include <SDL2/SDL.h>
 #include "engine.h"
 
 class Camera {
@@ -11,7 +12,8 @@ private:
 public:
 	std::string title;
 	Vector2 position;
-	
+
+	Vector2 scale;
 
 	Camera(std::string title, Vector2 position, Vector2* screen);
 
