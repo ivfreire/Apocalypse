@@ -5,9 +5,9 @@ Apocalypse is a simple game developed in C/C++ using SDL2 library for video rend
 ## Built With
 
 * [SDL2.0](https://https://www.libsdl.org/) - Simple DirectMedia Layer
-* [Retro Gaming font](https://www.dafont.com/pt/vasily.d7345) - Font using in game
-* [tinyxml2](https://leethomason.github.io/tinyxml2/)
-* [Tiled map editor](https://www.mapeditor.org/)
+* [Retro Gaming font](https://www.dafont.com/pt/vasily.d7345) - Font used in game
+* [tinyxml2](https://leethomason.github.io/tinyxml2/) - Library used for opening XML files
+* [Tiled map editor](https://www.mapeditor.org/) - Map editor
 
 ## Authors
 
