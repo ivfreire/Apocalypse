@@ -1,4 +1,4 @@
-<img src="images/title.png" width="20%" align="center"/>
+<img src="images/title.png" width="30%" align="center"/>
 
 # Description
 
