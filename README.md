@@ -14,30 +14,30 @@ The graphics are not completed yet and most of the image above is just placehold
 
 To build an run this project on linux, you must have installed on your computer the following packages
 
-'''
+"""
 libsdl2-2.0-0
 libsdl2-dev
 libsdl2-image-2.0-0
 libsdl2-image-dev
 libsdl2-ttf-2.0-0
 libsdl2-ttf-dev
-'''
+"""
 
 # Build
 
 On Deabian/Ubuntu, these packages can be installed with the command
 
-'''
+```
 $ sudo apt-get install ibsdl2-2.0-0 libsdl2-dev libsdl2-image-2.0-0 libsdl2-image-dev libsdl2-ttf-2.0-0 libsdl2-ttf-dev
-'''
+```
 
 Then, on the repository root, you should run
 
-'''
+```
 $ make
-'''
+```
 
-Now exist a new executable file on the root, apocalypse.o! Run this file and the game will launch.
+Now exist a new executable file on the root, `apocalypse.o`, run this file and the game will launch.
 
 ## Built With
 
@@ -56,4 +56,5 @@ This project is licensed under the GNU License - see the [LICENSE.md](LICENSE.md
 
 ## Acknowledgments
 
+* [SDL Game Development](https://books.google.com.br/books/about/SDL_Game_Development.html?id=SbmfrHIlhK4C&printsec=frontcover&source=kp_read_button&redir_esc=y#v=onepage&q&f=false) - Shaun Mitchell
 * Hat tip to the Hackerspace team of IFUSP (Institute of Physics of the University of São Paulo).
