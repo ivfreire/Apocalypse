@@ -23,7 +23,7 @@ libsdl2-ttf-2.0-0
 libsdl2-ttf-dev
 ```
 
-# Build
+## Build
 
 On Deabian/Ubuntu, these packages can be installed with the command
 
@@ -38,6 +38,10 @@ $ make
 ```
 
 Now exist a new executable file on the root, `apocalypse.o`, run this file and the game will launch.
+
+```
+$ ./apocalypse.o
+```
 
 ## Built With
 
