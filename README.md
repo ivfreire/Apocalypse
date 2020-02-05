@@ -1,6 +1,16 @@
-# Apocalypse
+<img src="images/title.png" width="20%" align="center"/>
+
+# Description
 
 Apocalypse is a simple game developed in C/C++ using SDL2 library for video rendering, event handling, threads etc.
+
+## Getting started
+
+Currently, the game is still under development and looks like this:
+
+<img src="images/screenshot.png" width="100%" float="right"/>
+
+The graphics are not completed yet and most of the image above is just placeholder for future graphics.
 
 ## Built With
 
