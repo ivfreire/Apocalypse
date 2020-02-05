@@ -2,16 +2,15 @@
 
 #include <iostream>
 #include <string>
+#include <vector>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <tinyxml2.h>
 #include "engine.h"
 
-#define MAX_TILES	256
-
 class Tileset {
 private:
-
+	std::vector<SDL_Surface*> tiles;
 
 public:
 	int firstgid;
@@ -23,11 +22,10 @@ public:
 	SDL_Surface* surface;
 	SDL_Texture* texture;
 
-	SDL_Surface* tiles[MAX_TILES];
-
 
 	Tileset(int firstgid, std::string path);
 
+	SDL_Surface* GetTile(int id);
 
 	~Tileset();
 

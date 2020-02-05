@@ -11,6 +11,8 @@ enum class GameState { MAINMENU, GAMEPLAY };
 
 class Game {
 private:
+	SDL_Color background;
+
 	Controller* ctrl;
 	bool running;
 

@@ -6,7 +6,7 @@ World::World(Controller* ctrl, std::string path) {
 	this->ctrl = ctrl;
 
 	this->map = new Map(path);
-	this->map->tilesets[0]->texture = SDL_CreateTextureFromSurface(ctrl->renderer, this->map->tilesets[0]->tiles[0]);
+	this->map->RenderLayers(ctrl->renderer);
 
 	this->size = { (float)1024, (float)1024 };
 	this->frontiers = { 0, 0, (int)this->size.x, (int)this->size.y };
@@ -56,7 +56,7 @@ void World::Update(float dtime) {
 }
 
 void World::Render(SDL_Renderer* rdr) {
-	this->map->Render(rdr);
+	this->map->Render(rdr, this->camera->position);
 
 	this->player->Render(rdr, this->camera->position);
 	for (int i = 0; i < MAX_ZOMBIES; i++) if (this->zombies[i]) this->zombies[i]->Render(rdr, this->camera->position);

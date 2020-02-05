@@ -35,7 +35,7 @@ void Gameplay::Update(float dtime) {
 
 void Gameplay::Render(SDL_Renderer* rdr) {
 	this->world->Render(rdr);
-	if (this->state == GameplayState::PAUSED) {
+	if (this->state == GameplayState::PAUSED || this->state == GameplayState::GAMEOVER) {
 		SDL_SetRenderDrawBlendMode(ctrl->renderer, SDL_BLENDMODE_BLEND);
 		SDL_SetRenderDrawColor(rdr, 0, 0, 0, 150);
 		SDL_RenderFillRect(rdr, &this->background);
