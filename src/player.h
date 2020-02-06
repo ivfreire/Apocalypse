@@ -11,12 +11,6 @@ class Player : public Entity {
 private:
 	UserInterface* UI;
 
-	bool running;
-	float runSpeed;
-	float vigor, maxVigor;
-
-	float buffer;
-
 public:
 	Weapon* weapon, * secWeapon;
 

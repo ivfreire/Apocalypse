@@ -4,6 +4,7 @@
 #include "world.h"
 #include "screen.h"
 #include "text.h"
+#include "panel.h"
 
 #define MAX_PLAYERS	4
 
@@ -13,8 +14,6 @@ class Gameplay {
 private:
 	Controller* ctrl;
 	bool lockEscape;
-
-	SDL_Rect background;
 
 public:
 	World* world;

@@ -9,10 +9,6 @@ Player::Player(std::string title, Vector2 position, UserInterface* UI) : Entity(
 	this->weapon->infinite = true;
 
 	this->health = 4;
-
-	this->runSpeed = 400.0f;
-	this->vigor = 5.0f;
-	this->maxVigor = this->vigor;
 }
 
 
@@ -22,17 +18,6 @@ void Player::Update(float dtime) {
 	this->weapon->Update(dtime);
 
 	this->Regenerate(0.1f, dtime);
-
-	if (this->running) this->vigor -= dtime;
-	else if (!this->running && this->vigor < this->maxVigor) this->vigor += dtime;
-	if (this->vigor > this->maxVigor) this->vigor = this->maxVigor;
-	if (this->vigor <= 0.0f) {
-		this->vigor = 0.0f;
-		this->running = false;
-	}
-
-	if (this->running) this->speed = this->runSpeed;
-	else this->speed = 200.0f;
 
 	Entity::Update(dtime);
 }

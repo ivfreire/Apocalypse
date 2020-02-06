@@ -9,27 +9,36 @@
 
 class Graph {
 private:
-	SDL_Color color;
+	SDL_Rect rect;
 
 	SDL_Surface* surface;
 	SDL_Texture* texture;
 
+	Vector2* window;
+
 public:
-	SDL_Rect rect;
 	Vector2 position, size;
-	bool centered;
+	struct Relative { Vector2 position, size; } relative;
+
+	SDL_Color color;
+	SDL_Color outline_color;
+
+	bool fill, outline;
+	bool image;
 
 
-	Graph();
+	Graph(Vector2* window, Vector2 position, Vector2 size, SDL_Color color);
 
 	void Update(float dtime);
 	void Render(SDL_Renderer* rdr);
-
+	
 	void SetColor(SDL_Color color);
 	void SetSurface(SDL_Surface* surface);
 	void SetTexture(SDL_Texture* texture);
+
 	SDL_Color GetColor();
 	SDL_Surface* GetSurface();
+	SDL_Texture* GetTexture();
 
 	~Graph();
 

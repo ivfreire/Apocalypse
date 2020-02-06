@@ -2,13 +2,12 @@
 
 #include <iostream>
 #include <string>
+#include <vector>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
 #include <SDL2/SDL_image.h>
 #include "engine.h"
 #include "screen.h"
-
-#define MAX_SCREENS	8
 
 class GUI {
 private:
@@ -16,7 +15,7 @@ private:
 
 public:
 	int current;
-	Screen* screens[MAX_SCREENS];
+	std::vector<Screen*> screens;
 
 
 	GUI(Vector2* window);

@@ -13,7 +13,9 @@ private:
 
 
 public:
-	Text(std::string text, TTF_Font* font, SDL_Color color, SDL_Renderer* rdr);
+	Text(Vector2* window, std::string text, TTF_Font* font, Vector2 position, SDL_Color color, SDL_Renderer* rdr);
+
+	void SetText(std::string text, TTF_Font* font, SDL_Renderer* rdr);
 
 	~Text();
 

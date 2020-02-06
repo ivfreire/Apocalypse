@@ -16,12 +16,15 @@ Game::Game(Controller* ctrl) {
 	this->gameplay = new Gameplay(this->ctrl);
 	this->gameplay->current = &this->gui->current;
 
-	this->gui->screens[0] = this->gameplay->menu;
+	this->gui->AddScreen(this->gameplay->hud);
+	this->gui->AddScreen(this->gameplay->menu);
 }
 
 
 
 void Game::Start() {
+	SDL_SetRenderDrawBlendMode( this->ctrl->renderer, SDL_BLENDMODE_BLEND);
+
 	this->gameplay->Start();
 }
 

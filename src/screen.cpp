@@ -2,29 +2,22 @@
 
 Screen::Screen(Vector2* window) {
 	this->window = window;
-	for (int i = 0; i < MAX_GRAPHS; i++) this->graphs[i] = NULL;
-	for (int i = 0; i < MAX_FONTS; i++) this->fonts[i] = NULL;
 }
 
 
 void Screen::Update(float dtime) {
-	for (int i = 0; i < MAX_GRAPHS; i++) if (this->graphs[i]) this->graphs[i]->Update(dtime);
+	for (Graph* graph : graphs) graph->Update(dtime);
 }
 
 void Screen::Render(SDL_Renderer* rdr) {
-	for (int i = 0; i < MAX_GRAPHS; i++) if (this->graphs[i]) {
-		if (this->graphs[i]->centered) this->graphs[i]->position.x = (int)((this->window->x - this->graphs[i]->rect.w) / 2);
-		this->graphs[i]->Render(rdr);
-	}
+	for (Graph* graph : graphs) graph->Render(rdr);
 }
 
 
 void Screen::LoadFont(std::string path, int size) {
-	bool found = false;
-	for (int i = 0; i < MAX_FONTS && !found; i++) if (this->fonts[i] == NULL) {
-		this->fonts[i] = TTF_OpenFont(path.c_str(), size);
-		found = true;
-	}
+	TTF_Font* font = TTF_OpenFont(path.c_str(), size);
+	if (font) this->fonts.push_back(TTF_OpenFont(path.c_str(), size));
+	else std::cerr << "Could not load font!" << std::endl;
 }
 
 

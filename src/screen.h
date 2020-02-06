@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <string>
+#include <vector>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
 #include <SDL2/SDL_image.h>
@@ -16,8 +17,8 @@ private:
 	Vector2* window;
 
 public:
-	Graph* graphs[MAX_GRAPHS];
-	TTF_Font* fonts[MAX_FONTS];
+	std::vector<Graph*> graphs;
+	std::vector<TTF_Font*> fonts;
 
 
 	Screen(Vector2* window);
