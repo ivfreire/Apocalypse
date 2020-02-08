@@ -40,11 +40,20 @@ void Controller::CalculateFrameRate() {
 	before = SDL_GetTicks();;
 	if (this->dtime > 0.016f) this->dtime = 0.016f;
 
+	SDL_Delay((int)(1000.0f / MAX_FRAME_RATE));
+
 	if (dtime != 0.0f) this->fps = (int)(1.0f / this->dtime);
 }
 
 float Controller::GetDeltaTime() {
 	return this->dtime;
+}
+
+
+SDL_Texture* Controller::LoadImage(std::string path) {
+	SDL_Surface* surface = IMG_Load(path.c_str());
+	return SDL_CreateTextureFromSurface(this->renderer, surface);
+	SDL_FreeSurface(surface);
 }
 
 

@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <string>
+#include <random>
 #include <SDL2/SDL.h>
 #include "entity.h"
 

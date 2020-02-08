@@ -18,6 +18,7 @@ Game::Game(Controller* ctrl) {
 
 	this->gui->AddScreen(this->gameplay->hud);
 	this->gui->AddScreen(this->gameplay->menu);
+	this->gui->AddScreen(this->gameplay->gameover);
 }
 
 

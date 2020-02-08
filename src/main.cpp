@@ -87,7 +87,10 @@ void Update(Game* game) {
 }
 
 void Render(Game* game) {
-	while (!game->IsOver()) game->Render();
+	while (!game->IsOver()) {
+		game->Render();
+		SDL_Delay((Uint32)(1000.0f / MAX_FRAME_RATE));
+	}
 }
 
 void PollEvent(Game* game) {

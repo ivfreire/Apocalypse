@@ -1,5 +1,8 @@
 #pragma once
 
+#include <iostream>
+#include <string>
+#include <vector>
 #include "controller.h"
 #include "world.h"
 #include "screen.h"
@@ -21,8 +24,10 @@ public:
 	int round;
 	int* current;
 
-	Screen* menu, * hud;
+	Screen* menu, * hud, * gameover;
 	GameplayState state;
+
+	std::vector<SDL_Texture*> textures;
 
 
 	Gameplay(Controller* ctrl);

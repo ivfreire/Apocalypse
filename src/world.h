@@ -2,8 +2,10 @@
 
 #include <iostream>
 #include <string>
+#include <vector>
 #include <random>
 #include <ctime>
+#include <math.h>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include "controller.h"
@@ -36,6 +38,8 @@ public:
 	Zombie* zombies[MAX_ZOMBIES];
 	Bullet* bullets[MAX_BULLETS];
 
+	std::vector<SDL_Texture*>* textures;
+
 	int kills;
 
 
@@ -62,15 +66,3 @@ public:
 	~World();
 
 };
-
-
-
-/*
-
-
-HASH-MAPS
-
-Entity* hashmap[ZOMBIES + BULLETS + ITEMS][ZOMBIES + BULLETS + ITEMS];
-
-
-*/

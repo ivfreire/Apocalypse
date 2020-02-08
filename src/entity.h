@@ -16,7 +16,11 @@ private:
 	bool destroy;
 	float life, lifetime;
 
+	SDL_Texture* texture;
+
 public:
+	bool image, fill;
+
 	std::string title;
 	SDL_Color color;
 
@@ -33,6 +37,8 @@ public:
 
 	Collider* collider;
 
+	Int2 square;
+
 
 	Entity(std::string title, Vector2 position, Vector2 size, EntityType type);
 
@@ -42,6 +48,7 @@ public:
 	void TakeDamage(float damage);
 	void SetPosition(Vector2 position);
 
+	void SetTexture(SDL_Texture* texture);
 	void SetLife(float time);
 	void Kill();
 	bool IsDead();

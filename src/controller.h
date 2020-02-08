@@ -1,8 +1,15 @@
 #pragma once
+
+#include <iostream>
+#include <string>
+#include <vector>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
+#include <SDL2/SDL_image.h>
 #include "engine.h"
 #include "userinterface.h"
+
+#define MAX_FRAME_RATE	60
 
 class Controller {
 private:
@@ -34,6 +41,8 @@ public:
 
 	void CalculateFrameRate();
 	float GetDeltaTime();
+
+	SDL_Texture* LoadImage(std::string path);
 
 	~Controller();
 

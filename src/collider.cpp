@@ -29,10 +29,17 @@ bool Collider::CheckCollision(Collider* other) {
 	else return false;
 }
 
-
-void Collider::SetRect(SDL_Rect rect) {
-	this->rect = rect;
+Vector2 Collider::CheckCollisionDistance(Collider* other) {
+	Vector2 distance = *other->position;
+	distance.add(*other->size, 0.5f);
+	distance.add(*this->position, -1.0f);
+	distance.add(*this->size, -0.5f);
+	
+	return distance;
 }
+
+
+void Collider::SetRect(SDL_Rect rect) { this->rect = rect; }
 
 
 Collider::~Collider() {

@@ -103,6 +103,7 @@ void World::SpawnZombies(int population) {
 			Vector2 position = { (float)(rand() % (int)this->size.x), (float)(rand() % (int)this->size.y) };
 			this->zombies[j] = this->RoundZombie(this->round);
 			this->zombies[j]->SetPosition(position);
+			this->zombies[j]->SetTexture(this->textures->at(0));
 			found = true;
 			spawned += 1;
 		}
@@ -115,16 +116,26 @@ void World::SpawnMissingZombies(int index) {
 		Vector2 position = { (float)(rand() % (int)this->size.x), (float)(rand() % (int)this->size.y) };
 		this->zombies[index] = this->RoundZombie(this->round);
 		this->zombies[index]->SetPosition(position);
+		this->zombies[index]->SetTexture(this->textures->at(0));
 		this->spawnedZombies += 1;
 	}
 }
 
 void World::CheckCollisions() {
-	for (int i = 0; i < MAX_ZOMBIES; i++) if (this->zombies[i]) {
-		if (this->zombies[i]->collider->CheckCollision(this->player->collider)) if (this->zombies[i]->DealDamage()) this->player->TakeDamage(1);
-		for (int j = 0; j < MAX_BULLETS; j++) if (this->bullets[j]) if (!this->bullets[j]->IsDead()) if (this->zombies[i]->collider->CheckCollision(this->bullets[j]->collider)) {
-			this->zombies[i]->TakeDamage(this->bullets[j]->damage, this->bullets[j]->id);
-			this->bullets[j]->OnCollision();
+	for (int i = 0; i < MAX_ZOMBIES; i++) if (this->zombies[i] != NULL) {
+		if (this->zombies[i]->square.IsNear(this->player->square)) if (this->zombies[i]->collider->CheckCollision(this->player->collider)) if (this->zombies[i]->DealDamage()) this->player->TakeDamage(1.0f);
+		for (int j = 0; j < MAX_BULLETS; j++) if (this->bullets[j] != NULL) if (this->zombies[i]->square.IsNear(this->bullets[j]->square)) if (this->zombies[i]->collider->CheckCollision(this->bullets[j]->collider)) {
+				this->zombies[i]->TakeDamage(this->bullets[j]->damage, 0);
+				this->bullets[j]->Kill();
+		}
+		for (int j = 0; j < MAX_ZOMBIES; j++) if (i != j) if (this->zombies[j] != NULL) if (this->zombies[i]->square.IsNear(this->zombies[j]->square)) {
+			Vector2 dist =  this->zombies[i]->collider->CheckCollisionDistance(this->zombies[j]->collider);
+			if (dist.module() < 32.0f) {
+				Vector2 disp = dist.unit();
+				disp.scale(32.0f);
+				disp.add(dist, -1.0f);
+				this->zombies[i]->dynamics.acceleration.add(disp, -1 / pow(this->ctrl->GetDeltaTime(), 2));
+			}
 		}
 	}
 }
@@ -150,7 +161,7 @@ void World::NewRound(int zombies, int round) {
 Zombie* World::RoundZombie(int round) {
 	Zombie* zombie = new Zombie("Zombie", { 0.0f, 0.0f });
 	zombie->health = round * 2;
-	zombie->speed = 50.0f + 10.f * round;
+	zombie->speed = (rand() % 20) + 30.0f + 10.f * round;
 	return zombie;
 }
 

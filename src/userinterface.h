@@ -1,18 +1,19 @@
 #pragma once
 
+#include <iostream>
+#include <string>
+#include <vector>
 #include <SDL2/SDL.h>
 #include "engine.h"
 
-#define MAX_JOYSTICKS	4
-#define MAX_AXES 8
-
 class UserInterface {
 private:
-	SDL_Joystick* joysticks[MAX_JOYSTICKS];
+	std::vector<SDL_Joystick*> joysticks;
 	bool en_joystick;
 
 public:
-	Vector2 axes[MAX_AXES];
+	std::vector<Vector2> axes;
+	std::vector<float> joystick_axes;
 
 
 	UserInterface();

@@ -8,6 +8,8 @@
   <terrain name="DarkWaterRocks" tile="141"/>
   <terrain name="LightGrass" tile="69"/>
   <terrain name="DarkGrass" tile="149"/>
+  <terrain name="DarkWalls" tile="114"/>
+  <terrain name="LightWalls" tile="34"/>
  </terraintypes>
  <tile id="0" terrain=",,,0"/>
  <tile id="1" terrain=",,0,0"/>
@@ -21,6 +23,11 @@
  <tile id="9" terrain=",,4,4"/>
  <tile id="10" terrain=",,4,"/>
  <tile id="11" terrain="4,,,"/>
+ <tile id="13" terrain=",,,7"/>
+ <tile id="14" terrain=",,7,7"/>
+ <tile id="15" terrain=",,7,"/>
+ <tile id="16" terrain="7,7,7,"/>
+ <tile id="17" terrain="7,7,,7"/>
  <tile id="20" terrain=",0,,0"/>
  <tile id="21" terrain="0,0,0,"/>
  <tile id="22" terrain="0,0,,0"/>
@@ -33,6 +40,10 @@
  <tile id="29" terrain="4,4,4,"/>
  <tile id="30" terrain="4,4,,4"/>
  <tile id="31" terrain="4,4,,"/>
+ <tile id="33" terrain=",7,,7"/>
+ <tile id="35" terrain="7,,7,"/>
+ <tile id="36" terrain="7,,7,7"/>
+ <tile id="37" terrain=",7,7,7"/>
  <tile id="41" terrain="0,,0,0"/>
  <tile id="42" terrain=",0,0,0"/>
  <tile id="43" terrain=",0,,"/>
@@ -42,7 +53,11 @@
  <tile id="49" terrain="4,,4,4"/>
  <tile id="50" terrain=",4,4,4"/>
  <tile id="51" terrain=",4,,"/>
+ <tile id="53" terrain=",7,,"/>
+ <tile id="54" terrain="7,7,,"/>
+ <tile id="55" terrain="7,,,"/>
  <tile id="61" terrain="0,0,0,0"/>
+ <tile id="62" terrain="7,7,7,7"/>
  <tile id="63" terrain="0,,0,"/>
  <tile id="65" terrain="2,2,2,2"/>
  <tile id="67" terrain="2,,2,"/>
@@ -60,6 +75,11 @@
  <tile id="89" terrain=",,5,5"/>
  <tile id="90" terrain=",,5,"/>
  <tile id="91" terrain="5,,,"/>
+ <tile id="93" terrain=",,,6"/>
+ <tile id="94" terrain=",,6,6"/>
+ <tile id="95" terrain=",,6,"/>
+ <tile id="96" terrain="6,6,6,"/>
+ <tile id="97" terrain="6,6,,6"/>
  <tile id="100" terrain=",1,,1"/>
  <tile id="101" terrain="1,1,1,"/>
  <tile id="102" terrain="1,1,,1"/>
@@ -71,6 +91,10 @@
  <tile id="109" terrain="5,5,5,"/>
  <tile id="110" terrain="5,5,,5"/>
  <tile id="111" terrain="5,5,,"/>
+ <tile id="113" terrain=",6,,6"/>
+ <tile id="115" terrain="6,,6,"/>
+ <tile id="116" terrain="6,,6,6"/>
+ <tile id="117" terrain=",6,6,6"/>
  <tile id="121" terrain="1,,1,1"/>
  <tile id="122" terrain=",1,1,1"/>
  <tile id="123" terrain=",1,,"/>
@@ -79,6 +103,20 @@
  <tile id="127" terrain=",3,,"/>
  <tile id="129" terrain="5,,5,5"/>
  <tile id="130" terrain=",5,5,5"/>
+ <tile id="131" terrain=",5,,"/>
+ <tile id="133" terrain=",6,,">
+  <objectgroup draworder="index" id="3">
+   <object id="2" x="13" y="8" width="19" height="24"/>
+  </objectgroup>
+ </tile>
+ <tile id="134" terrain="6,6,,">
+  <objectgroup draworder="index" id="4">
+   <object id="3" x="0.394737" y="8" width="32" height="24"/>
+  </objectgroup>
+ </tile>
+ <tile id="135" terrain="6,,,"/>
+ <tile id="141" terrain="1,1,1,1"/>
+ <tile id="142" terrain="6,6,6,6"/>
  <tile id="143" terrain="1,,1,"/>
  <tile id="145" terrain="3,3,3,3"/>
  <tile id="147" terrain="3,,3,"/>

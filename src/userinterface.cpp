@@ -1,11 +1,10 @@
 #include "userinterface.h"
 
 UserInterface::UserInterface() {
-	for (int i = 0; i < MAX_AXES; i++) this->axes[i] = { 0.0f, 0.0f };
-	for (int i = 0; i < MAX_JOYSTICKS; i++) this->joysticks[i] = NULL;
-
 	this->en_joystick = false;
 	if (SDL_NumJoysticks() > 0) this->InitJoystick();
+
+	this->axes.push_back({ 0.0f, 0.0f });
 }
 
 
@@ -15,15 +14,14 @@ void UserInterface::PollEvent(SDL_Event ev) {
 }
 
 void UserInterface::InitJoystick() {
-	bool found = false;
-	for (int i = 0; i < MAX_JOYSTICKS && !found; i++) {
-		found = true;
-		this->joysticks[i] = SDL_JoystickOpen(i);
+	this->joysticks.push_back(SDL_JoystickOpen(0));
 
-		std::cout << SDL_JoystickNumHats(this->joysticks[0]) << std::endl;
+	std::cout << SDL_JoystickName(this->joysticks.at(0)) << "\t" << SDL_JoystickNumAxes(this->joysticks.at(0)) << "\t";
+	std::cout  << SDL_JoystickNumHats(this->joysticks.at(0)) << "\t" << std::endl;
 
-		this->en_joystick = true;
-	}
+	for (int i = 0; i < SDL_JoystickNumAxes(this->joysticks.at(0)); i++) this->joystick_axes.push_back(0.0f);
+
+	this->en_joystick = true;
 }
 
 
@@ -43,7 +41,7 @@ void UserInterface::Keyboard(SDL_Event ev) {
 
 void UserInterface::Joystick(SDL_Event ev) {
 	if (ev.type == SDL_JOYAXISMOTION) {
-		Vector2 motion = { (float)SDL_JoystickGetAxis(this->joysticks[0], 0), (float)SDL_JoystickGetAxis(this->joysticks[0], 1) };
+		Vector2 motion = { (float)SDL_JoystickGetAxis(this->joysticks.at(0), 0), (float)SDL_JoystickGetAxis(this->joysticks.at(0), 1) };
 		motion.scale(1.0f / motion.module());
 		if (motion.module() > 0.19f) this->axes[0] = motion;
 		else this->axes[0] = { 0.0f , 0.0f };
@@ -51,14 +49,8 @@ void UserInterface::Joystick(SDL_Event ev) {
 }
 
 
-Vector2 UserInterface::GetAxes(int id) {
-	return this->axes[id];
-}
-
-float UserInterface::GetAxis(Axis axis, int id) {
-	return this->axes[id].get(axis);
-}
-
+Vector2 UserInterface::GetAxes(int id) { return this->axes.at(id); }
+float UserInterface::GetAxis(Axis axis, int id) { return this->axes.at(id).get(axis); }
 bool UserInterface::HasJoysticks() { return this->en_joystick; }
 
 

@@ -18,6 +18,7 @@ public:
 	void Render(SDL_Renderer* rdr);
 
 	bool CheckCollision(Collider* other);
+	Vector2 CheckCollisionDistance(Collider* other);
 
 	void SetRect(SDL_Rect);
 

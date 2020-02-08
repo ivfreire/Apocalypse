@@ -26,6 +26,9 @@ Entity::Entity(std::string title, Vector2 position, Vector2 size, EntityType typ
 	this->health = 10;
 
 	this->destroy = false;
+
+	this->image = false;
+	this->fill = true;
 }
 
 
@@ -36,21 +39,27 @@ void Entity::Update(float dtime) {
 	this->dynamics.velocity.add(this->dynamics.acceleration, dtime);
 	this->dynamics.position.add(this->dynamics.velocity, dtime);
 
+	this->dynamics.acceleration = { 0.0f, 0.0f };
+
 	this->rect = { (int)this->dynamics.position.x, (int)this->dynamics.position.y, (int)this->size.x, (int)this->size.y };
 
 	if (this->health <= 0) this->Kill();
 
-	// this->collider->Update(dtime);
+	this->square = { (int)this->dynamics.position.x % 100, (int)this->dynamics.position.y % 100 };
+
+	this->collider->Update(dtime);
 }
 
 void Entity::Render(SDL_Renderer* rdr, Vector2 camera) {
 	SDL_SetRenderDrawColor(rdr, this->color.r, this->color.g, this->color.b, this->color.a);
 
 	SDL_Rect new_rect = { (int)(this->rect.x - camera.x), (int)(this->rect.y - camera.y), this->rect.w, this->rect.h };
-	this->collider->SetRect(new_rect);
 
-	SDL_RenderFillRect(rdr, &new_rect);
-	this->collider->Render(rdr);
+	//this->collider->SetRect(new_rect);
+	if (this->fill) SDL_RenderFillRect(rdr, &new_rect);
+	if (this->image) SDL_RenderCopy(rdr, this->texture, NULL, &new_rect);
+
+	// this->collider->Render(rdr);
 }
 
 
@@ -60,6 +69,8 @@ void Entity::TakeDamage(float damage) {
 
 void Entity::SetPosition(Vector2 position) { this->dynamics.position = position; }
 
+
+void Entity::SetTexture(SDL_Texture* texture) { this->texture = texture; }
 
 void Entity::SetLife(float time) {
 	this->lifetime = time;

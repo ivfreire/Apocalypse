@@ -25,13 +25,16 @@ private:
 	std::vector<std::string> SplitString(std::string input, char pattern);
 	SDL_Surface* GetTile(int id);
 
+	std::vector<Tileset*> tilesets;
 	std::vector<Layer> layers;
+
+	void LoadTilesets(tinyxml2::XMLElement* map);
+	void LoadLayers(tinyxml2::XMLElement* map);
+
 
 public:
 	int width, height;
 	int tilewidth, tileheight;
-
-	std::vector<Tileset*> tilesets;
 
 
 	Map(std::string path);

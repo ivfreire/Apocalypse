@@ -2,9 +2,28 @@
 
 Gameplay::Gameplay(Controller* ctrl) {
 	this->ctrl = ctrl;
-	this->world = new World(ctrl, "maps/test_scene2.xml");
 	this->state = GameplayState::PLAYING;
 	this->round = 0;
+
+
+	this->world = new World(ctrl, "maps/scene.xml");
+	this->world->textures = &this->textures;
+
+
+
+	// ======== LOADS RESOURCES ======== //
+
+	this->textures.push_back(ctrl->LoadImage("res/images/zombie.png"));
+
+
+	// ======== LOADS GRAPHICS ELEMENTS ======== //
+
+	// HUD
+	this->hud = new Screen(&ctrl->window);
+	this->hud->LoadFont("res/fonts/retro_gaming.ttf", 72);
+	this->hud->graphs.push_back(new Panel(&ctrl->window, { 8, 8 }, { 400, 8 }, { 255, 0, 0, 50 }));			// HEALTH BAR BACKGROUND
+	this->hud->graphs.push_back(new Panel(&ctrl->window, { 8, 8 }, { 400, 8 }, { 255, 0, 0, 255 }));		// HEALTH BAR
+	this->hud->graphs.back()->outline = true; this->hud->graphs.back()->outline_color = { 255, 255, 255, 255 };
 
 	// GAME MENU
 	this->menu = new Screen(&ctrl->window);
@@ -14,12 +33,13 @@ Gameplay::Gameplay(Controller* ctrl) {
 	this->menu->graphs.push_back(new Text(&ctrl->window, "GAME MENU", this->menu->fonts.back(), { 0.0f, 0.0f }, { 255, 255, 255, 255 }, ctrl->renderer));
 	this->menu->graphs.back()->relative.position = { 0.5f, 0.3f }; this->menu->graphs.back()->position.x = -this->menu->graphs.back()->size.x / 2;
 
-	// HUD
-	this->hud = new Screen(&ctrl->window);
-	this->hud->LoadFont("res/fonts/retro_gaming.ttf", 72);
-	this->hud->graphs.push_back(new Panel(&ctrl->window, { 8, 8 }, { 400, 8 }, { 255, 0, 0, 50 }));			// HEALTH BAR BACKGROUND
-	this->hud->graphs.push_back(new Panel(&ctrl->window, { 8, 8 }, { 400, 8 }, { 255, 0, 0, 255 }));		// HEALTH BAR
-	this->hud->graphs.back()->outline = true; this->hud->graphs.back()->outline_color = { 255, 255, 255, 255 };
+	// GAMEOVER
+	this->gameover = new Screen(&ctrl->window);
+	this->gameover->graphs.push_back(new Panel(&ctrl->window, { 0, 0 }, { 0, 0 }, { 0, 0, 0, 170 }));
+	this->gameover->graphs.back()->relative.size = { 1.0f, 1.0f };
+	this->gameover->graphs.push_back(new Text(&ctrl->window, "GAME OVER", this->menu->fonts.at(0), { 0.0f, 0.0f }, { 255, 255, 255, 255 }, ctrl->renderer));
+	this->gameover->graphs.back()->relative.position = { 0.5f, 0.3f }; this->gameover->graphs.back()->position.x = -this->gameover->graphs.back()->size.x / 2;
+
 }
 
 
@@ -37,7 +57,10 @@ void Gameplay::Update(float dtime) {
 		this->world->Update(dtime);
 		this->world->PlayerFire();
 		this->RoundControl();
-		if (this->world->IsPlayerDead()) this->state = GameplayState::GAMEOVER;
+		if (this->world->IsPlayerDead()) {
+			this->state = GameplayState::GAMEOVER;
+			*this->current = 2;
+		}
 
 		this->hud->graphs.at(1)->size.x = (int)(this->world->player->health * 100);
 
@@ -57,12 +80,18 @@ void Gameplay::PollEvent(SDL_Event ev) {
 		if (ev.key.keysym.sym == SDLK_F3) this->ctrl->showDebugInfo = true;
 		if (ev.key.keysym.sym == SDLK_ESCAPE && !this->lockEscape) {
 			if (this->state == GameplayState::PAUSED) { this->state = GameplayState::PLAYING; *this->current = 0; }
-			else { this->state = GameplayState::PAUSED; *this->current = 1; }
+			else if (this->state == GameplayState::PLAYING) { this->state = GameplayState::PAUSED; *this->current = 1; }
 			this->lockEscape = true;
 		}
 	} else if (ev.type == SDL_KEYUP) {
 		if (ev.key.keysym.sym == SDLK_ESCAPE) this->lockEscape = false;
 		if (ev.key.keysym.sym == SDLK_F3) this->ctrl->showDebugInfo = false;
+	}
+	if (this->ctrl->UI->HasJoysticks()) {
+		if (ev.type == SDL_JOYBUTTONDOWN) if (ev.jbutton.button == 9) {
+			if (this->state == GameplayState::PAUSED) { this->state = GameplayState::PLAYING; *this->current = 0; }
+			else { this->state = GameplayState::PAUSED; *this->current = 1; }
+		}
 	}
 	this->world->PollEvent(ev);
 }
@@ -80,7 +109,7 @@ void Gameplay::NewRound() {
 }
 
 int Gameplay::ZombiesSpawnNumber(int round) {
-	return 5 * round;
+	return 8 * round;
 }
 
 
