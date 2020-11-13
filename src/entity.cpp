@@ -55,7 +55,7 @@ void Entity::Render(SDL_Renderer* rdr, Vector2 camera) {
 
 	SDL_Rect new_rect = { (int)(this->rect.x - camera.x), (int)(this->rect.y - camera.y), this->rect.w, this->rect.h };
 
-	//this->collider->SetRect(new_rect);
+	// this->collider->SetRect(new_rect);
 	if (this->fill) SDL_RenderFillRect(rdr, &new_rect);
 	if (this->image) SDL_RenderCopy(rdr, this->texture, NULL, &new_rect);
 
@@ -70,7 +70,11 @@ void Entity::TakeDamage(float damage) {
 void Entity::SetPosition(Vector2 position) { this->dynamics.position = position; }
 
 
-void Entity::SetTexture(SDL_Texture* texture) { this->texture = texture; }
+void Entity::SetTexture(SDL_Texture* texture) {
+	this->texture = texture;
+	this->fill = false;
+	this->image = true;
+}
 
 void Entity::SetLife(float time) {
 	this->lifetime = time;

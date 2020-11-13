@@ -6,17 +6,18 @@ Gameplay::Gameplay(Controller* ctrl) {
 	this->round = 0;
 
 
-	this->world = new World(ctrl, "maps/scene.xml");
+	this->world = new World(ctrl, "maps/test_scene.xml");
 	this->world->textures = &this->textures;
-
 
 
 	// ======== LOADS RESOURCES ======== //
 
-	this->textures.push_back(ctrl->LoadImage("res/images/zombie.png"));
+	this->textures.push_back(ctrl->LoadImage("res/tilesets/zombie.png"));
+	this->textures.push_back(ctrl->LoadImage("res/tilesets/player.png"));
 
+	this->world->player->SetTexture(this->textures.at(1));
 
-	// ======== LOADS GRAPHICS ELEMENTS ======== //
+	// ======== LOADS GRAPHICAL ELEMENTS ======== //
 
 	// HUD
 	this->hud = new Screen(&ctrl->window);

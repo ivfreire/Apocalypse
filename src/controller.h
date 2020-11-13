@@ -8,8 +8,9 @@
 #include <SDL2/SDL_image.h>
 #include "engine.h"
 #include "userinterface.h"
+#include "tileset.h"
 
-#define MAX_FRAME_RATE	60
+#define MAX_FRAME_RATE	120
 
 class Controller {
 private:

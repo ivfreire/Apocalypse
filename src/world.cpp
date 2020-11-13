@@ -46,13 +46,6 @@ void World::Update(float dtime) {
 		this->bullets[i]->Update(dtime);
 		if (this->bullets[i]->IsDead()) this->bullets[i] = NULL;
 	}
-
-	Vector2 center = this->player->dynamics.position;
-	center.add(this->player->size, 0.5f);
-	this->camera->CenterAt(center, this->size);
-
-	this->frontiers.x = -this->camera->position.x;
-	this->frontiers.y = -this->camera->position.y;
 }
 
 void World::Render(SDL_Renderer* rdr) {
@@ -67,6 +60,13 @@ void World::Render(SDL_Renderer* rdr) {
 	SDL_RenderDrawRect(rdr, &this->frontiers);
 
 	SDL_RenderSetScale(rdr, 1.0f, 1.0f);
+
+	Vector2 center = this->player->dynamics.position;
+	center.add(this->player->size, 0.5f);
+	this->camera->CenterAt(center, this->size);
+
+	this->frontiers.x = -this->camera->position.x;
+	this->frontiers.y = -this->camera->position.y;
 }
 
 void World::PollEvent(SDL_Event ev) {

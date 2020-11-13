@@ -99,6 +99,7 @@ void PollEvent(Game* game) {
 		SDL_PollEvent(&ev);
 		game->PollEvent(ev);
 		if (ev.type == SDL_QUIT) game->GameOver();
+		SDL_Delay((Uint32)(1000.0f / MAX_FRAME_RATE));
 	}
 }
 
