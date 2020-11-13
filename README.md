@@ -1,6 +1,6 @@
 <img src="images/title.png" width="30%" align="center"/>
 
-Apocalypse is a simple game developed in C/C++ using SDL2 library for video rendering, event handling, threads etc.
+Apocalypse is a simple topdown shooter game created in C++ and using SDL2 library for handling graphics, audio and other stuff. This project is an attempt to learn how videgame engines work under the hood and get hands on code. The is still under development but the core mechanics already work.
 
 ## Getting started
 
@@ -31,7 +31,7 @@ On Deabian/Ubuntu, these packages can be installed with the command
 $ sudo apt-get install ibsdl2-2.0-0 libsdl2-dev libsdl2-image-2.0-0 libsdl2-image-dev libsdl2-ttf-2.0-0 libsdl2-ttf-dev
 ```
 
-Then, on the repository root, you should run
+Then, on repository root run
 
 ```
 $ make
@@ -47,7 +47,7 @@ $ ./apocalypse.o
 
 * [SDL2.0](https://https://www.libsdl.org/) - Simple DirectMedia Layer
 * [Retro Gaming font](https://www.dafont.com/pt/vasily.d7345) - Font used in game
-* [tinyxml2](https://leethomason.github.io/tinyxml2/) - Library used for opening XML files
+* [tinyxml2](https://leethomason.github.io/tinyxml2/) - Library used for parsing XML files
 * [Tiled map editor](https://www.mapeditor.org/) - Map editor
 
 ## Authors
