@@ -21,11 +21,8 @@ Game::Game(Controller* ctrl) {
 	this->gui->AddScreen(this->gameplay->gameover);
 }
 
-
-
 void Game::Start() {
 	SDL_SetRenderDrawBlendMode( this->ctrl->renderer, SDL_BLENDMODE_BLEND);
-
 	this->gameplay->Start();
 }
 
@@ -52,8 +49,6 @@ void Game::PollEvent(SDL_Event ev) {
 	this->gameplay->PollEvent(ev);
 }
 
-
-
 void Game::GameOver() {
 	this->running = false;
 }
@@ -61,8 +56,6 @@ void Game::GameOver() {
 bool Game::IsOver() {
 	return !this->running;
 }
-
-
 
 Game::~Game() {
 	this->gui->~GUI();

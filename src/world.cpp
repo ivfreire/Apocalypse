@@ -73,7 +73,6 @@ void World::PollEvent(SDL_Event ev) {
 	this->player->PollEvent(ev);
 }
 
-
 void World::InitPlayers(int money) {
 	this->player->kills = 0;
 	this->player->money = money;
@@ -81,7 +80,6 @@ void World::InitPlayers(int money) {
 }
 
 bool World::IsPlayerDead() { return this->player->IsDead(); }
-
 
 void World::PlayerFire() {
 	if (this->player->weapon->IsFiring()) if (this->player->weapon->Fire()) this->SpawnBullet(this->player->weapon);
@@ -103,7 +101,7 @@ void World::SpawnZombies(int population) {
 			Vector2 position = { (float)(rand() % (int)this->size.x), (float)(rand() % (int)this->size.y) };
 			this->zombies[j] = this->RoundZombie(this->round);
 			this->zombies[j]->SetPosition(position);
-			this->zombies[j]->SetTexture(this->textures->at(0));
+			// this->zombies[j]->SetTileset(this->textures->at(0), { 0, 0, 32, 32 });
 			found = true;
 			spawned += 1;
 		}
@@ -116,7 +114,7 @@ void World::SpawnMissingZombies(int index) {
 		Vector2 position = { (float)(rand() % (int)this->size.x), (float)(rand() % (int)this->size.y) };
 		this->zombies[index] = this->RoundZombie(this->round);
 		this->zombies[index]->SetPosition(position);
-		this->zombies[index]->SetTexture(this->textures->at(0));
+		// this->zombies[index]->SetTexture(this->textures->at(0));
 		this->spawnedZombies += 1;
 	}
 }

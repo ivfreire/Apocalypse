@@ -5,17 +5,14 @@ Gameplay::Gameplay(Controller* ctrl) {
 	this->state = GameplayState::PLAYING;
 	this->round = 0;
 
-
-	this->world = new World(ctrl, "maps/test_scene.xml");
+	this->world = new World(ctrl, "maps/test_scene2.xml");
 	this->world->textures = &this->textures;
 
-
 	// ======== LOADS RESOURCES ======== //
-
 	this->textures.push_back(ctrl->LoadImage("res/tilesets/zombie.png"));
 	this->textures.push_back(ctrl->LoadImage("res/tilesets/player.png"));
 
-	this->world->player->SetTexture(this->textures.at(1));
+	this->world->player->SetTileset(this->textures.at(1), { 0, 0, 64, 64 });
 
 	// ======== LOADS GRAPHICAL ELEMENTS ======== //
 
@@ -43,12 +40,9 @@ Gameplay::Gameplay(Controller* ctrl) {
 
 }
 
-
-
 void Gameplay::Start() {
 	this->world->Start();
 	this->world->InitPlayers(500);
-
 	*this->current = 0;
 }
 
@@ -66,8 +60,6 @@ void Gameplay::Update(float dtime) {
 		this->hud->graphs.at(1)->size.x = (int)(this->world->player->health * 100);
 
 	} else if (this->state == GameplayState::PAUSED) {
-
-
 
 	}
 }
@@ -97,7 +89,6 @@ void Gameplay::PollEvent(SDL_Event ev) {
 	this->world->PollEvent(ev);
 }
 
-
 void Gameplay::RoundControl() {
 	if (this->world->kills == this->ZombiesSpawnNumber(this->round)) this->NewRound();
 }
@@ -113,7 +104,6 @@ int Gameplay::ZombiesSpawnNumber(int round) {
 	return 8 * round;
 }
 
-
 Gameplay::~Gameplay() {
-
+	for (SDL_Texture* texture : this->textures) SDL_DestroyTexture(texture);
 }

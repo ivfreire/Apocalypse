@@ -2,8 +2,6 @@
 
 Zombie::Zombie(std::string title, Vector2 position) : Entity(title, position, { 32.0f, 32.0f }, EntityType::ZOMBIE) {
 	this->color = { 255, 0, 0, 255 };
-	this->image = true;
-	this->fill = false;
 
 	this->speed = 50.0f;
 	this->mass = (rand() % 30) + 30;

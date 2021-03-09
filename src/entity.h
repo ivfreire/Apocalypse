@@ -17,6 +17,7 @@ private:
 	float life, lifetime;
 
 	SDL_Texture* texture;
+	SDL_Rect tileset_rect;
 
 public:
 	bool image, fill;
@@ -49,6 +50,7 @@ public:
 	void SetPosition(Vector2 position);
 
 	void SetTexture(SDL_Texture* texture);
+	void SetTileset(SDL_Texture* texture, SDL_Rect rect);
 	void SetLife(float time);
 	void Kill();
 	bool IsDead();

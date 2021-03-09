@@ -30,7 +30,6 @@ void Player::PollEvent(SDL_Event ev) {
 	}
 }
 
-
 void Player::Movement(float dtime) {
 	Vector2 velocity = UI->GetAxes(0);
 	velocity.scale(this->speed);
@@ -48,15 +47,12 @@ void Player::SetFacing() {
 
 void Player::TakeDamage(float damage) {
 	Entity::TakeDamage(damage);
-	// std::cout << this->health << std::endl;
 }
-
 
 void Player::Regenerate(float rate, float dtime) {
 	if (this->health < 4.0f && this->health > 0.0f) this->health += rate * dtime;
 	if (this->health > 4.0f) this->health = 4.0f;
 }
-
 
 Player::~Player() {
 

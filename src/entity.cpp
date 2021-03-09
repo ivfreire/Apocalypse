@@ -31,7 +31,6 @@ Entity::Entity(std::string title, Vector2 position, Vector2 size, EntityType typ
 	this->fill = true;
 }
 
-
 void Entity::Update(float dtime) {
 	if (this->life > 0.0f) this->life -= dtime;
 	if (this->life <= 0.0f && this->lifetime > 0.0f) this->Kill();
@@ -57,11 +56,10 @@ void Entity::Render(SDL_Renderer* rdr, Vector2 camera) {
 
 	// this->collider->SetRect(new_rect);
 	if (this->fill) SDL_RenderFillRect(rdr, &new_rect);
-	if (this->image) SDL_RenderCopy(rdr, this->texture, NULL, &new_rect);
+	if (this->image) SDL_RenderCopy(rdr, this->texture, &this->tileset_rect, &new_rect);
 
 	// this->collider->Render(rdr);
 }
-
 
 void Entity::TakeDamage(float damage) {
 	this->health -= damage;
@@ -69,11 +67,15 @@ void Entity::TakeDamage(float damage) {
 
 void Entity::SetPosition(Vector2 position) { this->dynamics.position = position; }
 
-
 void Entity::SetTexture(SDL_Texture* texture) {
 	this->texture = texture;
 	this->fill = false;
 	this->image = true;
+}
+
+void Entity::SetTileset(SDL_Texture* texture, SDL_Rect rect) {
+	this->SetTexture(texture);
+	this->tileset_rect = rect;
 }
 
 void Entity::SetLife(float time) {
@@ -83,7 +85,6 @@ void Entity::SetLife(float time) {
 
 void Entity::Kill() { this->destroy = true; }
 bool Entity::IsDead() { return this->destroy; };
-
 
 Entity::~Entity() {
 

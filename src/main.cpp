@@ -14,14 +14,11 @@ int main(int argc, char* argv[]) {
 		return -1;
 	}
 
-
 	// Instanciates global variables
 	Controller* controller;
 	SDL_Window* window;
 	SDL_Renderer* renderer;
 	Game* game;
-
-
 
 	// Defines global variables
 	controller = new Controller(800, 600);
@@ -48,10 +45,6 @@ int main(int argc, char* argv[]) {
 
 	game = new Game(controller);
 
-
-
-
-
 	game->Start();
 
 	// THREADS
@@ -62,7 +55,6 @@ int main(int argc, char* argv[]) {
 	// threads[3] = std::thread(Command, game);
 
 	for (int i = 0; i < MAX_THREADS; i++) threads[i].join();
-
 
 	// Free up space
 	game->~Game();
@@ -76,11 +68,6 @@ int main(int argc, char* argv[]) {
 	SDL_Quit();
 	return 0;
 }
-
-
-
-
-
 
 void Update(Game* game) {
 	while (!game->IsOver()) game->Update();
